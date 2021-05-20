@@ -1,34 +1,117 @@
 <!--<!DOCTYPE html>-->
 <!--<html>-->
-
 <!--<head>-->
-<!--    <meta charset='utf-8'>-->
-<!--    <meta http-equiv='X-UA-Compatible' content='IE=edge'>-->
-<!--    <title>GeoAR.js demo</title>-->
-<!--    <script src='https://aframe.io/releases/0.9.2/aframe.min.js'></script>-->
-<!--    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>-->
-<!--    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>-->
-<!--    <script>-->
-<!--        THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'-->
-<!--    </script>-->
-<!--    <script src="./script.js"></script>-->
-<!--    <link rel="stylesheet" type="text/css" href="./style.css"/>-->
+<!--    <title> AR Portfolio - Mariam Raad </title>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="description" content="Augmented Reality Portfolio">-->
+<!--    <meta name="author" content="Mariam Raad">-->
+<!--    <meta name="viewport" content="width=device-width, user-scalable=no"> &lt;!&ndash; , minimum-scale=1.0, maximum-scale=2.0 &ndash;&gt;-->
+<!--	-->
+<!--    &lt;!&ndash; settings for favicons &ndash;&gt;-->
+<!--    <link rel="apple-touch-icon" sizes="180x180" href="https://mariamraad.github.io/ar-portfolio/assets/images/favicon/apple-touch-icon.png">-->
+<!--    <link rel="icon" type="image/png" sizes="32x32" href="https://mariamraad.github.io/ar-portfolio/assets/images/favicon/favicon-32x32.png">-->
+<!--    <link rel="icon" type="image/png" sizes="16x16" href="https://mariamraad.github.io/ar-portfolio/assets/images/favicon/favicon-16x16.png">-->
+<!--    <link rel="manifest" href="https://mariamraad.github.io/ar-portfolio/assets/images/favicon/site.webmanifest">-->
+<!--    <link rel="mask-icon" href="https://mariamraad.github.io/ar-portfolio/assets/images/favicon/safari-pinned-tab.svg" color="#21284d">-->
+<!--    <link rel="shortcut icon" href="https://mariamraad.github.io/ar-portfolio/assets/images/favicon/favicon.ico">-->
+<!--    <meta name="msapplication-TileColor" content="#da532c">-->
+<!--    <meta name="msapplication-config" content="https://mariamraad.github.io/ar-portfolio/assets/images/favicon/browserconfig.xml">-->
+<!--    <meta name="theme-color" content="#ffffff">-->
+
+<!--    &lt;!&ndash;  this is REQUIRED for iOS &ndash;&gt;-->
+<!--    <meta name="apple-mobile-web-app-capable" content="yes">-->
+
+<!--    &lt;!&ndash; A-Frame &ndash;&gt;-->
+<!--    <script src="lib/aframe-v1.0.4.js"></script> &lt;!&ndash; https://aframe.io/releases/1.0.4/aframe.min.js &ndash;&gt;-->
+<!--	-->
+<!--    &lt;!&ndash; AR.js &ndash;&gt;-->
+<!--    &lt;!&ndash; Version without NFT/image tracking but with marker + location based support &ndash;&gt;-->
+<!--    <script src="lib/aframe-ar.3.1.0.js"></script> &lt;!&ndash; https://raw.githack.com/AR-js-org/AR.js/3.1.0/aframe/build/aframe-ar.js &ndash;&gt;-->
+<!--    -->
+<!--    &lt;!&ndash; import the webpage's stylesheet &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="https://mariamraad.github.io/ar-portfolio/style.css">-->
+
+<!--    &lt;!&ndash; import scripts to add functionality &ndash;&gt;-->
+<!--    <script src="https://mariamraad.github.io/ar-portfolio/eventhandler.js"></script>-->
+<!--    <script src="https://mariamraad.github.io/ar-portfolio/aframe-render-order-component.js"></script> &lt;!&ndash; https://unpkg.com/aframe-render-order-component@1.1.0/dist/aframe-render-order-component.min.js &ndash;&gt;-->
 <!--</head>-->
 
-<!--<body style='margin: 0; overflow: hidden;'>-->
-<!--    <div class="centered instructions"></div>-->
-<!--    <a-scene-->
-<!--        vr-mode-ui='enabled: false'-->
-<!--        embedded-->
-<!--        arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>-->
-<!--    <a-camera gps-camera rotation-reader></a-camera>-->
-<!--</a-scene>-->
-<!--<div class="centered">-->
-<!--    <button data-action="change">Click</button>-->
-<!--</div>-->
-<!--</body>-->
+<!--<body>-->
+<!--    &lt;!&ndash; Logo &ndash;&gt;-->
+<!--    <div class="logoWrapper">-->
+<!--        <input id="logo" type="image" class="logoImage" src="https://mariamraad.github.io/ar-portfolio/assets/images/logo/Logo_MandR_Schrift.png"></input>-->
+<!--    </div> -->
+<!--	-->
+<!--    &lt;!&ndash; Scanner &ndash;&gt;	-->
+<!--    <div class="scannerWrapper">-->
+<!--	<input id="scanner" type="image" class="scannerImage" src="https://mariamraad.github.io/ar-portfolio/assets/images/scanner/Scanner_ohneHintergrund_Text.png"></input>-->
+<!--    </div>-->
+<!--	-->
+<!--    <a-scene ar-session-notifier cursor-modifier id="scene" renderer="sortObjects: true; antialias: true; alpha: true; precision: mediump;" render-order="layer1, layer2, layer3" embedded arjs="trackingMethod: best; sourceType: webcam; patternRatio: 0.8 debugUIEnabled: false;" vr-mode-ui="enabled: false;">-->
+<!--	-->
+<!--	<a-assets>-->
+<!--            <img id="asset_btn_play"     src="https://mariamraad.github.io/ar-portfolio/assets/images/buttons/3D/Play.png"></img>-->
+<!--            <img id="asset_btn_forward"  src="https://mariamraad.github.io/ar-portfolio/assets/images/buttons/3D/Pfeil_Rechts_Text.png"></img>-->
+<!--            <img id="asset_btn_backward" src="https://mariamraad.github.io/ar-portfolio/assets/images/buttons/3D/Pfeil_Links_Text.png"></img>-->
+<!--            <img id="asset_btn_linkedin" src="https://mariamraad.github.io/ar-portfolio/assets/images/buttons/3D/LinkedIn_Text.png"></img>-->
+<!--            <img id="asset_btn_xing"     src="https://mariamraad.github.io/ar-portfolio/assets/images/buttons/3D/Xing_Text.png"></img>-->
+<!--            <img id="asset_btn_website"  src="https://mariamraad.github.io/ar-portfolio/assets/images/buttons/3D/Webseite_Text.png"></img>-->
+<!--		-->
+<!--	    <audio id="asset_audio_click" src="https://mariamraad.github.io/ar-portfolio/assets/audio/click_1.aac" type="audio/aac" preload="auto" crossorigin playsinline></audio>-->
+<!-- 		-->
+<!--            <img id="asset_descr_0" src="https://mariamraad.github.io/ar-portfolio/assets/images/texts/Onboarding.png"></img>-->
+<!--            <img id="asset_descr_1" src="https://mariamraad.github.io/ar-portfolio/assets/images/texts/Beschreibung_SafeNetKids.png"></img>-->
+<!--            <img id="asset_descr_2" src="https://mariamraad.github.io/ar-portfolio/assets/images/texts/Beschreibung_Zauberwald.png"></img>-->
+<!--            <img id="asset_descr_3" src="https://mariamraad.github.io/ar-portfolio/assets/images/texts/Beschreibung_FlyingEagle.png"></img>-->
+<!--            <img id="asset_descr_4" src="https://mariamraad.github.io/ar-portfolio/assets/images/texts/Offboarding.png"></img>-->
+<!--		-->
+<!--	    &lt;!&ndash; the second and thrid video can't/shouldn't be preloaded because then it will sometimes start randomly playing (at the beginning of the app) (with Android (Vers.10, Chrome/Firefox)) &ndash;&gt;-->
+<!--            <video id="asset_vid_1" src="https://mariamraad.github.io/ar-portfolio/assets/videos/SafeNetKids_compressed.mp4"  type="video/mp4" preload="auto" response-type="arraybuffer" loop crossorigin webkit-playsinline autoplay playsinline play="false"></video> 	        -->
+<!--	    <video id="asset_vid_2" src="https://mariamraad.github.io/ar-portfolio/assets/videos/Zauberwald_compressed.mp4"   type="video/mp4" 		      response-type="arraybuffer" loop crossorigin webkit-playsinline autoplay playsinline play="false"></video> 	        -->
+<!--	    <video id="asset_vid_3" src="https://mariamraad.github.io/ar-portfolio/assets/videos/FlyingEagle_compressed.mp4"  type="video/mp4" 		      response-type="arraybuffer" loop crossorigin webkit-playsinline autoplay playsinline play="false"></video> 	        	-->
+<!--	</a-assets> -->
 
-<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+<!--        <a-marker logohandler scannerhandler videohandler id="marker" emitevents="true" preset="custom" type="pattern" url="https://mariamraad.github.io/ar-portfolio/assets/images/markers/pattern_black.patt" smooth="true" smoothCount="10" smoothTolerance="0.02" smoothThreshold="2">-->
+<!--		&lt;!&ndash; Scene 0 &ndash;&gt;-->
+<!--		<a-plane 		   id="description_0" 	  material="src: #asset_descr_0;" 					 position="0 0 1.25" 	  rotation="-90 0 0" height="1"   width="2.2" render-order="layer1"></a-plane>-->
+<!--                <a-plane forwardhandler    id="button_forward_0"  material="src: #asset_btn_forward;   transparent:true; alpha-test:0.5" position="1.25 0.25 3.5" rotation="-90 0 0" height="0.7" width="0.7" render-order="layer3"></a-plane>-->
+<!--		-->
+<!--		&lt;!&ndash; Scene 1 &ndash;&gt;-->
+<!--		<a-plane videohandler      id="button_play_1"     material="src: #asset_btn_play;      transparent:true; alpha-test:0.5" position="0 0.2 2" 	   rotation="-90 0 0" height="0.7" width="0.7" render-order="layer3" visible="false"></a-plane>-->
+<!--		<a-plane 		   id="video_1" 	  material="src: #asset_vid_1;" 		   		         position="0 0 2" 	   rotation="-90 0 0" height="1.7" width="2.2" render-order="layer1" visible="false"></a-plane>-->
+<!--		<a-plane 		   id="description_1"     material="src: #asset_descr_1;" 				         position="0 0 0" 	   rotation="-90 0 0" height="1.7" width="2.2" render-order="layer1" visible="false"></a-plane>-->
+<!--                <a-plane forwardhandler    id="button_forward_1"  material="src: #asset_btn_forward;   transparent:true; alpha-test:0.5" position="1.25 0.25 3.5"  rotation="-90 0 0" height="0.7" width="0.7" render-order="layer3" visible="false"></a-plane>-->
+<!--		<a-plane backwardhandler   id="button_backward_1" material="src: #asset_btn_backward; transparent:true; alpha-test:0.5"  position="-1.25 0.25 3.5" rotation="-90 0 0" height="0.7" width="0.7" render-order="layer3" visible="false"></a-plane>-->
+<!--		-->
+<!--		&lt;!&ndash; Scene 2 &ndash;&gt;-->
+<!--		<a-plane videohandler      id="button_play_2"     material="src: #asset_btn_play;     transparent:true; alpha-test:0.5" position="0 0.2 2" 	  rotation="-90 0 0" height="0.7" width="0.7" render-order="layer3" visible="false"></a-plane>-->
+<!--		<a-plane 		   id="video_2"           material="src: #asset_vid_2;" 				        position="0 0 2" 	  rotation="-90 0 0" height="1.7" width="2.2" render-order="layer1" visible="false"></a-plane>-->
+<!--		<a-plane 		   id="description_2"     material="src: #asset_descr_2;"   			   	        position="0 0 0" 	  rotation="-90 0 0" height="1.7" width="2.2" render-order="layer1" visible="false"></a-plane>-->
+<!--                <a-plane forwardhandler    id="button_forward_2"  material="src: #asset_btn_forward;  transparent:true; alpha-test:0.5" position="1.25 0.25 3.5"  rotation="-90 0 0" height="0.7" width="0.7" render-order="layer3" visible="false"></a-plane>-->
+<!--		<a-plane backwardhandler   id="button_backward_2" material="src: #asset_btn_backward; transparent:true; alpha-test:0.5" position="-1.25 0.25 3.5" rotation="-90 0 0" height="0.7" width="0.7" render-order="layer3" visible="false"></a-plane>-->
+<!--		-->
+<!--		&lt;!&ndash; Scene 3 &ndash;&gt;-->
+<!--		<a-plane videohandler      id="button_play_3"     material="src: #asset_btn_play;     transparent:true; alpha-test:0.5" position="0 0.2 2" 	  rotation="-90 0 0" height="0.7" width="0.7" render-order="layer3" visible="false"></a-plane>-->
+<!--		<a-plane 		   id="video_3" 	  material="src: #asset_vid_3;" 					position="0 0 2" 	  rotation="-90 0 0" height="1.7" width="2.2" render-order="layer1" visible="false"></a-plane>-->
+<!--		<a-plane 		   id="description_3" 	  material="src: #asset_descr_3;" 					position="0 0 0" 	  rotation="-90 0 0" height="1.7" width="2.2" render-order="layer1" visible="false"></a-plane>-->
+<!--                <a-plane forwardhandler    id="button_forward_3"  material="src: #asset_btn_forward;  transparent:true; alpha-test:0.5" position="1.25 0.25 3.5"  rotation="-90 0 0" height="0.7" width="0.7" render-order="layer3" visible="false"></a-plane>-->
+<!--		<a-plane backwardhandler   id="button_backward_3" material="src: #asset_btn_backward; transparent:true; alpha-test:0.5" position="-1.25 0.25 3.5" rotation="-90 0 0" height="0.7" width="0.7" render-order="layer3" visible="false"></a-plane>-->
+<!--		-->
+<!--		&lt;!&ndash; Scene 4 &ndash;&gt;-->
+<!--		<a-plane 		   id="description_4" 	  material="src: #asset_descr_4;" 					position="0 0 1.25" 	  rotation="-90 0 0" height="1"   width="2.2" render-order="layer1" visible="false"></a-plane>-->
+<!--                <a-plane linkhandler	   id="button_linkedin"   material="src: #asset_btn_linkedin; transparent:true; alpha-test:0.5" position="-1 0.2 1.8" 	  rotation="-90 0 0" height="0.7" width="0.7" render-order="layer3" visible="false"></a-plane>-->
+<!--		<a-plane linkhandler	   id="button_xing"       material="src: #asset_btn_xing;     transparent:true; alpha-test:0.5" position="0 0.2 1.8" 	  rotation="-90 0 0" height="0.7" width="0.7" render-order="layer3" visible="false"></a-plane>-->
+<!--		<a-plane linkhandler	   id="button_website"    material="src: #asset_btn_website;  transparent:true; alpha-test:0.5" position="1 0.2 1.8" 	  rotation="-90 0 0" height="0.7" width="0.7" render-order="layer3" visible="false"></a-plane>-->
+<!--		<a-plane backwardhandler   id="button_backward_4" material="src: #asset_btn_backward; transparent:true; alpha-test:0.5" position="-1.25 0.25 3.5" rotation="-90 0 0" height="0.7" width="0.7" render-order="layer3" visible="false"></a-plane>-->
+<!--	    </a-marker>-->
+<!--	    -->
+<!--	&lt;!&ndash; static camera that moves according to the device movemenents &ndash;&gt;-->
+<!--        <a-entity camera></a-entity>-->
+<!--    </a-scene>-->
+<!--</body>-->
+<!--</html>-->
+<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 
 <style>
   .arjs-loader {
@@ -51,30 +134,33 @@
   }
 </style>
 
-<!-- rawgithack development URL -->
-<script src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js'></script>
-
-<body style='margin : 0px; overflow: hidden;'>
-   <!-- minimal loader shown until image descriptors are loaded -->
+<body style="margin : 0px; overflow: hidden;">
+  <!-- minimal loader shown until image descriptors are loaded -->
   <div class="arjs-loader">
     <div>Loading, please wait...</div>
   </div>
-    <a-scene
-        vr-mode-ui="enabled: false;"
-        renderer="logarithmicDepthBuffer: true;"
-        embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'>
-
-        <!-- use rawgithack to retrieve the correct url for nft marker (see 'trex' below) -->
-        <a-nft
-            type='nft' url='https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex'
-            smooth='true' smoothCount='10' smoothTolerance='0.01' smoothThreshold='5'>
-            <a-entity
-                gltf-model='https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf'
-                scale="5 5 5"
-                position="100 100 0"
-                >
-            </a-entity>
-        </a-nft>
-		<a-entity camera></a-entity>
-    </a-scene>
+  <a-scene
+    vr-mode-ui="enabled: false;"
+    renderer="logarithmicDepthBuffer: true;"
+    embedded
+    arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
+  >
+    <!-- we use cors proxy to avoid cross-origin problems ATTENTION! you need to set up your server -->
+    <a-nft
+      type="nft"
+      url="your-server/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex"
+      smooth="true"
+      smoothCount="10"
+      smoothTolerance=".01"
+      smoothThreshold="5"
+    >
+      <a-entity
+        gltf-model="your-server/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+        scale="5 5 5"
+        position="50 150 0"
+      >
+      </a-entity>
+    </a-nft>
+    <a-entity camera></a-entity>
+  </a-scene>
 </body>
