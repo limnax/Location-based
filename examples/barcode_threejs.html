@@ -80,6 +80,11 @@ window.ARThreeOnLoad = function() {
 			rotationTarget += 1;
 		}, false);
 
+
+// Set the renderer autoClear to false, otherwise it
+// clears the canvas before each render call.
+renderer.autoClear = false;
+
 		var tick = function() {
 			arScene.process();
 			arScene.renderOn(renderer);
