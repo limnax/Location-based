@@ -71,7 +71,7 @@ window.ARThreeOnLoad = function() {
 		// sphere.position.z = 0.5;
 
 		var root = new THREE.Object3D();
-        // scene.add(root);
+        scene.add(root);
 
     /* Load Model */
     var threeGLTFLoader = new THREE.GLTFLoader();
@@ -94,8 +94,8 @@ window.ARThreeOnLoad = function() {
     );
 
 
-		markerRoot.add(root);
-		arScene.scene.add(markerRoot);
+		// markerRoot.add(root);
+		arScene.scene.add(root);
 
 		var rotationV = 0;
 		var rotationTarget = 0;
