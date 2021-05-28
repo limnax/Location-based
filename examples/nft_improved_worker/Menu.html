@@ -63,39 +63,14 @@ window.ARThreeOnLoad = function() {
 		// See /doc/patterns/Matrix code 3x3 (72dpi)/20.png
 		var markerRoot = arController.createThreeBarcodeMarker(20);
 
-		// var sphere = new THREE.Mesh(
-		// 	new THREE.SphereGeometry(0.5, 8, 8),
-		// 	new THREE.MeshNormalMaterial()
-		// );
-		// sphere.material.flatShading;
-		// sphere.position.z = 0.5;
-
-		var root = new THREE.Object3D();
-        // scene.add(root);
-
-    /* Load Model */
-    var threeGLTFLoader = new THREE.GLTFLoader();
-
-    threeGLTFLoader.load("../Data/models/Flamingo.glb", function (gltf) {
-            model = gltf.scene.children[0];
-            model.position.z = 0;
-            model.position.x = 100;
-            model.position.y = 100;
-
-            var animation = gltf.animations[0];
-            var mixer = new THREE.AnimationMixer(model);
-            mixers.push(mixer);
-            var action = mixer.clipAction(animation);
-            action.play();
-
-            root.matrixAutoUpdate = false;
-            root.add(model);
-        }
-    );
-
-
-		// markerRoot.add(root);
-		arScene.scene.add(root);
+		var sphere = new THREE.Mesh(
+			new THREE.SphereGeometry(0.5, 8, 8),
+			new THREE.MeshNormalMaterial()
+		);
+		sphere.material.flatShading;
+		sphere.position.z = 0.5;
+		markerRoot.add(sphere);
+		arScene.scene.add(markerRoot);
 
 		var rotationV = 0;
 		var rotationTarget = 0;
