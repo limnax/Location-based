@@ -23,7 +23,9 @@
 <!--    >-->
 <!--        <source src="./FlyingEagle.mp4" type='video/mp4'>-->
 <!--    </video>-->
-    <video id="video"></video>
+    <video id="video">
+        <source src="./FlyingEagle.mp4" type='video/mp4'>
+    </video>
      <button type="button" id="Next">Click Me!</button>
     <canvas style="position: absolute; left:0; top:0" id="canvas_draw"></canvas>
 </div>
@@ -43,7 +45,7 @@
     // var container = document.getElementById('container');
     // var video = document.getElementById('video');
     // var canvas_draw = document.getElementById('canvas_draw');
-    // var btn = document.getElementById('Next');
+    var btn = document.getElementById('Next');
     //
     //     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     //         var hint = {
@@ -75,6 +77,7 @@
 
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
    navigator.getUserMedia({ audio: false, video: { width: 1280, height: 720 } },
+       btn.addEventListener('click',
       function(stream) {
          var video = document.querySelector('video');
          video.srcObject = stream;
@@ -85,7 +88,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       function(err) {
          console.log("The following error occurred: " + err.name);
       }
-   );
+       ));
 } else {
    console.log("getUserMedia not supported");
 }
