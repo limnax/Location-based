@@ -90,7 +90,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     sphere.position.z = 0;
     sphere.position.x = 100;
     sphere.position.y = 100;
-    sphere.scale.set(200, 200, 200);
+    sphere.scale.set(100, 100, 100);
 
     root.matrixAutoUpdate = false;
     root.add(sphere);
