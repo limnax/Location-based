@@ -95,11 +95,11 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             model.position.x = 100;
             model.position.y = 100;
 
-            var animation = gltf.animations[0];
-            var mixer = new THREE.AnimationMixer(model);
-            mixers.push(mixer);
-            var action = mixer.clipAction(animation);
-            action.play();
+            // var animation = gltf.animations[0];
+            // var mixer = new THREE.AnimationMixer(model);
+            // mixers.push(mixer);
+            // var action = mixer.clipAction(animation);
+            // action.play();
 
             root.matrixAutoUpdate = false;
             root.add(model);
