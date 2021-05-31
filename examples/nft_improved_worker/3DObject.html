@@ -1,0 +1,73 @@
+<canvas id="c"></canvas>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>NFT_test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/video-style.css" />
+  </head>
+  <body>
+    <div id="loading">
+      <img src="../Data/logo.gif" />
+      <span class="loading-text">Loading, please wait</span>
+    </div>
+
+    <!--
+  ==================
+  STATS
+  ==================
+  -->
+
+    <div id="stats" class="ui stats">
+      <div id="stats1" class="stats-item">
+        <p class="stats-item-title">
+          Main
+        </p>
+      </div>
+
+      <div id="stats2" class="stats-item">
+        <p class="stats-item-title">
+          Worker
+        </p>
+      </div>
+    </div>
+
+    <!--
+      ==================
+      CAMERA VIDEO & CANVAS
+      ==================
+      -->
+
+    <div id="app">
+      <video loop autoplay muted playsinline id="video">
+        <source src="./FlyingEagle.mp4" type='video/mp4'>
+      </video>
+
+      <canvas id="canvas"></canvas>
+    </div>
+    <a
+      href="https://raw.githubusercontent.com/artoolkit/artoolkit5/master/doc/Marker%20images/pinball.jpg"
+      class="ui marker"
+      target="_blank"
+    >
+      🖼 Marker Image
+    </a>
+<!--    <script src="../js/third_party/three.js/stats.min.js"></script>-->
+<!--    <script src="../js/third_party/three.js/three.min.js"></script>-->
+<!--    <script src="../js/third_party/three.js/GLTFLoader.js"></script>-->
+<!--    <script src="threejs_changed_3d.js"></script>-->
+    <script src="https://threejsfundamentals.org/threejs/resources/threejs/r127/build/three.module.js"></script>
+    <script src="https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/controls/OrbitControls.js"></script>
+   <script src="https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/loaders/OBJLoader.js"></script>
+
+
+    <script>
+      /**
+       * STATS
+       */
+     main();
+    </script>
+  </body>
+</html>
