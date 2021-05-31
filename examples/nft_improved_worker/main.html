@@ -47,7 +47,8 @@
     // var canvas_draw = document.getElementById('canvas_draw');
     var btn = document.getElementById('Next');
     //
-    //     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            btn.addEventListener("click", BtnVideo);
     //         var hint = {
     //             audio: false,
     //             video: true
@@ -70,26 +71,58 @@
     //
     //             console.log(hint);
     //         }
-    //     }
+        }
     // navigator.getUserMedia = navigator.getUserMedia ||
     //                      navigator.webkitGetUserMedia ||
     //                      navigator.mozGetUserMedia;
+function BtnVideo() {
+    var hint = {
+        audio: false,
+        video: true
+    };
+    if (window.innerWidth < 800) {
+        var width = (window.innerWidth < window.innerHeight) ? 240 : 360;
+        var height = (window.innerWidth < window.innerHeight) ? 360 : 240;
 
-if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-   navigator.getUserMedia({ audio: false, video: { width: 1280, height: 720 } },
-       function(stream) {
-         var video = document.querySelector("video");
-         video.srcObject = stream;
-         video.onloadedmetadata = function(e) {
-           video.play();
-         };
-      },
-      function(err) {
-         console.log("The following error occurred: " + err.name);
-      }
-       );
-} else {
-   console.log("getUserMedia not supported");
+        var aspectRatio = window.innerWidth / window.innerHeight;
+
+        console.log(width, height);
+
+        hint = {
+            audio: false,
+            video: {
+                facingMode: 'environment',
+                width: {min: width, max: width}
+            },
+        };
+
+        console.log(hint);
+    }
+
+    navigator.mediaDevices.getUserMedia(hint).then(function (stream) {
+        video.srcObject = stream;
+        video.addEventListener('loadedmetadata', function () {
+            video.play();
+
+            console.log('video', video, video.videoWidth, video.videoHeight);
+
+            start(
+                container,
+                markers['pinball'],
+                video,
+                video.videoWidth,
+                video.videoHeight,
+                canvas,
+                function () {
+                    statsMain.update()
+                },
+                function () {
+                    statsWorker.update();
+                },
+                null
+            );
+        });
+    });
 }
 </script>
 </body>
