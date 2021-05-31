@@ -44,30 +44,30 @@
     var canvas_draw = document.getElementById('canvas_draw');
     var btn = document.getElementById('Next');
 
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            var hint = {
-                audio: false,
-                video: true
-            };
-            if (window.innerWidth < 800) {
-                var width = (window.innerWidth < window.innerHeight) ? 240 : 360;
-                var height = (window.innerWidth < window.innerHeight) ? 360 : 240;
-
-                var aspectRatio = window.innerWidth / window.innerHeight;
-
-                console.log(width, height);
-
-                hint = {
-                    audio: false,
-                    video: {
-                        facingMode: 'environment',
-                        width: {min: width, max: width}
-                    },
-                };
-
-                console.log(hint);
-            }
-        }
+        // if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        //     var hint = {
+        //         audio: false,
+        //         video: true
+        //     };
+        //     if (window.innerWidth < 800) {
+        //         var width = (window.innerWidth < window.innerHeight) ? 240 : 360;
+        //         var height = (window.innerWidth < window.innerHeight) ? 360 : 240;
+        //
+        //         var aspectRatio = window.innerWidth / window.innerHeight;
+        //
+        //         console.log(width, height);
+        //
+        //         hint = {
+        //             audio: false,
+        //             video: {
+        //                 facingMode: 'environment',
+        //                 width: {min: width, max: width}
+        //             },
+        //         };
+        //
+        //         console.log(hint);
+        //     }
+        // }
 </script>
 </body>
 </html>
