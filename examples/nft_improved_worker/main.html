@@ -20,6 +20,7 @@
     >
         <source src="./FlyingEagle.mp4" type='video/mp4'>
     </video>
+     <button type="button" id="Next">Click Me!</button>
     <canvas style="position: absolute; left:0; top:0" id="canvas_draw"></canvas>
 </div>
 
@@ -38,6 +39,7 @@
     var container = document.getElementById('container');
     var video = document.getElementById('video');
     var canvas_draw = document.getElementById('canvas_draw');
+    var btn = document.getElementById('Next');
 
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         var hint = {};
