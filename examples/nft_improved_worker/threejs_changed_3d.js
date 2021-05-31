@@ -96,7 +96,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     // root.add(sphere);
 
     // load .Obj to scene
-var url = 'https://threejsfundamentals.org/threejs/resources/models/windmill/windmill.obj'
+var url = './assets/modern.obj'
 	var loader = new THREE.OBJLoader();
 	loader.load( url, function ( model ) {
 		window.model = model
