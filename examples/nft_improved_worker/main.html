@@ -48,29 +48,29 @@
     var btn = document.getElementById('Next');
     //
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            btn.addEventListener("click", BtnVideo);
-    //         var hint = {
-    //             audio: false,
-    //             video: true
-    //         };
-    //         if (window.innerWidth < 800) {
-    //             var width = (window.innerWidth < window.innerHeight) ? 240 : 360;
-    //             var height = (window.innerWidth < window.innerHeight) ? 360 : 240;
-    //
-    //             var aspectRatio = window.innerWidth / window.innerHeight;
-    //
-    //             console.log(width, height);
-    //
-    //             hint = {
-    //                 audio: false,
-    //                 video: {
-    //                     facingMode: 'environment',
-    //                     width: {min: width, max: width}
-    //                 },
-    //             };
-    //
-    //             console.log(hint);
-    //         }
+            // btn.addEventListener("click", BtnVideo);
+            var hint = {
+                audio: false,
+                video: true
+            };
+            if (window.innerWidth < 800) {
+                var width = (window.innerWidth < window.innerHeight) ? 240 : 360;
+                var height = (window.innerWidth < window.innerHeight) ? 360 : 240;
+
+                var aspectRatio = window.innerWidth / window.innerHeight;
+
+                console.log(width, height);
+
+                hint = {
+                    audio: false,
+                    video: {
+                        facingMode: 'environment',
+                        width: {min: width, max: width}
+                    },
+                };
+
+                console.log(hint);
+            }
         }
     // navigator.getUserMedia = navigator.getUserMedia ||
     //                      navigator.webkitGetUserMedia ||
