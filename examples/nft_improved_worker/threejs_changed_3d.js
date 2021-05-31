@@ -96,26 +96,26 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     // root.add(sphere);
 
     // load .Obj to scene
-var url = './assets/modern.obj'
-	var loader = new THREE.OBJLoader();
-	loader.load( url, function ( model ) {
-		window.model = model
-		model.position.y = 0.5
-
-		model.rotation.x = 3*Math.PI/2
-		model.rotation.y = Math.PI
-
-		var material = model.children[0].material
-		material.shading = THREE.SmoothShading
-		material.color.set('#444')
-		material.needsUpdate = true
-
-		model.scale.set(1,1,1).multiplyScalar(0.005)
-
-		// root.add( model )
-		// scene.add( model )
-		// model.position.z = -4
-	});
+// var url = './assets/modern.obj'
+// 	var loader = new THREE.OBJLoader();
+// 	loader.load( url, function ( model ) {
+// 		window.model = model
+// 		model.position.y = 0.5
+//
+// 		model.rotation.x = 3*Math.PI/2
+// 		model.rotation.y = Math.PI
+//
+// 		var material = model.children[0].material
+// 		material.shading = THREE.SmoothShading
+// 		material.color.set('#444')
+// 		material.needsUpdate = true
+//
+// 		model.scale.set(1,1,1).multiplyScalar(0.005)
+//
+// 		// root.add( model )
+// 		// scene.add( model )
+// 		// model.position.z = -4
+// 	});
     /* Load Model */
     var threeGLTFLoader = new THREE.GLTFLoader();
 
@@ -125,11 +125,11 @@ var url = './assets/modern.obj'
             model.position.x = 100;
             model.position.y = 100;
 
-            // var animation = gltf.animations[0];
-            // var mixer = new THREE.AnimationMixer(model);
-            // mixers.push(mixer);
-            // var action = mixer.clipAction(animation);
-            // action.play();
+            var animation = gltf.animations[0];
+            var mixer = new THREE.AnimationMixer(model);
+            mixers.push(mixer);
+            var action = mixer.clipAction(animation);
+            action.play();
 
             root.matrixAutoUpdate = false;
             root.add(model);
