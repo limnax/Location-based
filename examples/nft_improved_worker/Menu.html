@@ -1,113 +1,124 @@
+<!DOCTYPE html>
 <html>
-<head>
-<title>Barcode marker example with Three.js</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-<style>
-html,body {
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	text-align: center;
-	overflow-x: hidden;
-}
-.portrait canvas {
-	transform-origin: 0 0;
-	transform: rotate(-90deg) translateX(-100%);
-}
-.desktop canvas {
- 	transform: scale(-1, 1);
-}
-</style>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <title>NFT_test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/video-style.css" />
+  </head>
+  <body>
+    <div id="loading">
+      <img src="../Data/logo.gif" />
+      <span class="loading-text">Loading, please wait</span>
+    </div>
 
-<h1>Barcode marker example with Three.js</h1>
-<p>On Chrome on Android, tap the screen to start playing video stream.</p>
-<p>Show <a href="https://github.com/artoolkit/artoolkit5/blob/master/doc/patterns/Matrix%20code%203x3%20(72dpi)/20.png">3x3 marker id 20</a> to camera to display a colorful sphere on top of it. Tap the sphere to rotate it.
+    <!--
+  ==================
+  STATS
+  ==================
+  -->
 
-<p>&larr; <a href="index.html">Back to examples</a></p>
+    <div id="stats" class="ui stats">
+      <div id="stats1" class="stats-item">
+        <p class="stats-item-title">
+          Main
+        </p>
+      </div>
 
-<script async src="../build/artoolkit.debug.js"></script>
-<script src="../js/artoolkit.api.js"></script>
-<script async src="js/third_party/three.js/three.min.js"></script>
-<script async src="../js/artoolkit.three.js"></script>
+      <div id="stats2" class="stats-item">
+        <p class="stats-item-title">
+          Worker
+        </p>
+      </div>
+    </div>
 
-<script>
+    <!--
+      ==================
+      CAMERA VIDEO & CANVAS
+      ==================
+      -->
 
-window.ARThreeOnLoad = function() {
+    <div id="app">
+      <video loop autoplay muted playsinline id="video">
+        <source src="./FlyingEagle.mp4" type='video/mp4'>
+      </video>
 
-	ARController.getUserMediaThreeScene({maxARVideoSize: 320, cameraParam: 'Data/camera_para-iPhone 5 rear 640x480 1.0m.dat',
-	onSuccess: function(arScene, arController, arCamera) {
+      <canvas id="canvas"></canvas>
+    </div>
+    <a
+      href="https://raw.githubusercontent.com/artoolkit/artoolkit5/master/doc/Marker%20images/pinball.jpg"
+      class="ui marker"
+      target="_blank"
+    >
+      🖼 Marker Image
+    </a>
+    <script src="../js/third_party/three.js/stats.min.js"></script>
+    <script src="../js/third_party/three.js/three.min.js"></script>
+    <script src="../js/third_party/three.js/GLTFLoader.js"></script>
+    <script src="threejs_changed_3d.js"></script>
 
-		document.body.className = arController.orientation;
+    <script>
+      /**
+       * STATS
+       */
+      var statsMain = new Stats();
+      statsMain.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+      document.getElementById("stats1").appendChild(statsMain.dom);
 
-		arController.setPatternDetectionMode(artoolkit.AR_MATRIX_CODE_DETECTION);
+      var statsWorker = new Stats();
+      statsWorker.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+      document.getElementById("stats2").appendChild(statsWorker.dom);
 
-		var renderer = new THREE.WebGLRenderer({antialias: true});
-		if (arController.orientation === 'portrait') {
-			var w = (window.innerWidth / arController.videoHeight) * arController.videoWidth;
-			var h = window.innerWidth;
-			renderer.setSize(w, h);
-			renderer.domElement.style.paddingBottom = (w-h) + 'px';
-		} else {
-			if (/Android|mobile|iPad|iPhone/i.test(navigator.userAgent)) {
-				renderer.setSize(window.innerWidth, (window.innerWidth / arController.videoWidth) * arController.videoHeight);
-			} else {
-				renderer.setSize(arController.videoWidth, arController.videoHeight);
-				document.body.className += ' desktop';
-			}
-		}
+      /**
+       * APP / ELEMENTS
+       */
+      var container = document.getElementById("app");
+      var video = document.getElementById("video");
+      var canvas = document.getElementById("canvas");
 
-		document.body.insertBefore(renderer.domElement, document.body.firstChild);
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        var hint = {
+          audio: false,
+          video: true
+        };
 
-		// See /doc/patterns/Matrix code 3x3 (72dpi)/20.png
-		var markerRoot = arController.createThreeBarcodeMarker(20);
+        if (window.innerWidth < 800) {
+          hint = {
+            audio: false,
+            video: {
+                width: { ideal: 480 },
+                height: { ideal: 640 },
+                facingMode:
+                    { exact:
+                        "environment"
+                    }
+                },
+          };
+        }
 
-		var sphere = new THREE.Mesh(
-			new THREE.SphereGeometry(0.5, 8, 8),
-			new THREE.MeshNormalMaterial()
-		);
-		sphere.material.flatShading;
-		sphere.position.z = 0.5;
-		markerRoot.add(sphere);
-		arScene.scene.add(markerRoot);
+        navigator.mediaDevices.getUserMedia(hint).then(function(stream) {
+          video.srcObject = stream;
+          video.addEventListener("loadedmetadata", function() {
+            video.play();
 
-		var rotationV = 0;
-		var rotationTarget = 0;
-
-		renderer.domElement.addEventListener('click', function(ev) {
-			ev.preventDefault();
-			rotationTarget += 1;
-		}, false);
-
-
-// Set the renderer autoClear to false, otherwise it
-// clears the canvas before each render call.
-renderer.autoClear = false;
-
-		var tick = function() {
-			arScene.process();
-			arScene.renderOn(renderer);
-			rotationV += (rotationTarget - sphere.rotation.z) * 0.05;
-			sphere.rotation.z += rotationV;
-			rotationV *= 0.8;
-
-			requestAnimationFrame(tick);
-		};
-
-		tick();
-
-	}});
-
-	delete window.ARThreeOnLoad;
-
-};
-
-if (window.ARController && ARController.getUserMediaThreeScene) {
-	ARThreeOnLoad();
-}
-
-</script>
-
-</body>
+            start(
+              container,
+              markers["pinball"],
+              video,
+              video.videoWidth,
+              video.videoHeight,
+              canvas,
+              function() {
+                statsMain.update();
+              },
+              function() {
+                statsWorker.update();
+              },
+              null
+            );
+          });
+        });
+      }
+    </script>
+  </body>
 </html>
