@@ -7,6 +7,9 @@
             margin: 0;
             padding: 0;
         }
+        button{
+            float: right;
+        }
     </style>
 </head>
 <body>
@@ -41,27 +44,30 @@
     var canvas_draw = document.getElementById('canvas_draw');
     var btn = document.getElementById('Next');
 
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        var hint = {};
-        if (isMobile()) {
-            hint = {
-                facingMode: {"ideal": "environment"},
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            var hint = {
                 audio: false,
-                video: {
-                    width: { ideal: 480 },
-                    height: { ideal: 640 },
-                },
+                video: true
             };
-        }
+            if (window.innerWidth < 800) {
+                var width = (window.innerWidth < window.innerHeight) ? 240 : 360;
+                var height = (window.innerWidth < window.innerHeight) ? 360 : 240;
 
-        navigator.mediaDevices.getUserMedia({video: hint}).then(function (stream) {
-            video.srcObject = stream;
-            video.play();
-            video.addEventListener("loadedmetadata", function() {
-                start(container, markers["pinball"], video, video.videoWidth, video.videoHeight, canvas_draw, function() {statsMain.update()});
-            });
-        });
-    }
+                var aspectRatio = window.innerWidth / window.innerHeight;
+
+                console.log(width, height);
+
+                hint = {
+                    audio: false,
+                    video: {
+                        facingMode: 'environment',
+                        width: {min: width, max: width}
+                    },
+                };
+
+                console.log(hint);
+            }
+        }
 </script>
 </body>
 </html>
