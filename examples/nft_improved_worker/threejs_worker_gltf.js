@@ -66,45 +66,45 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     });
     renderer.setPixelRatio(window.devicePixelRatio);
 
-    // var scene = new THREE.Scene();
-    //
-    // var camera = new THREE.Camera();
-    // camera.matrixAutoUpdate = false;
-    // // var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-    // // camera.position.z = 400;
-    //
-    // scene.add(camera);
-    //
-    // var light = new THREE.AmbientLight(0xffffff);
-    // scene.add(light);
-    //
-    // var sphere = new THREE.Mesh(
-    //     new THREE.SphereGeometry(0.5, 8, 8),
-    //     new THREE.MeshNormalMaterial()
-    // );
-    //
-    // var root = new THREE.Object3D();
-    // scene.add(root);
-    //
-    // /* Load Model */
-    // var threeGLTFLoader = new THREE.GLTFLoader();
-    //
-    // threeGLTFLoader.load("../Data/models/House_001_GLB.glb", function (gltf) {
-    //         model = gltf.scene.children[0];
-    //         model.position.z = 0;
-    //         model.position.x = 100;
-    //         model.position.y = 100;
-    //
-    //         // var animation = gltf.animations[0];
-    //         // var mixer = new THREE.AnimationMixer(model);
-    //         // mixers.push(mixer);
-    //         // var action = mixer.clipAction(animation);
-    //         // action.play();
-    //
-    //         root.matrixAutoUpdate = false;
-    //         root.add(model);
-    //     }
-    // );
+    var scene = new THREE.Scene();
+
+    var camera = new THREE.Camera();
+    camera.matrixAutoUpdate = false;
+    // var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+    // camera.position.z = 400;
+
+    scene.add(camera);
+
+    var light = new THREE.AmbientLight(0xffffff);
+    scene.add(light);
+
+    var sphere = new THREE.Mesh(
+        new THREE.SphereGeometry(0.5, 8, 8),
+        new THREE.MeshNormalMaterial()
+    );
+
+    var root = new THREE.Object3D();
+    scene.add(root);
+
+    /* Load Model */
+    var threeGLTFLoader = new THREE.GLTFLoader();
+
+    threeGLTFLoader.load("../Data/models/House_001_GLB.glb", function (gltf) {
+            model = gltf.scene.children[0];
+            model.position.z = 0;
+            model.position.x = 100;
+            model.position.y = 100;
+
+            // var animation = gltf.animations[0];
+            // var mixer = new THREE.AnimationMixer(model);
+            // mixers.push(mixer);
+            // var action = mixer.clipAction(animation);
+            // action.play();
+
+            root.matrixAutoUpdate = false;
+            root.add(model);
+        }
+    );
 
     var load = function() {
         vw = input_width;
