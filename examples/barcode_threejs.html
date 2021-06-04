@@ -63,30 +63,12 @@ window.ARThreeOnLoad = function() {
 		// See /doc/patterns/Matrix code 3x3 (72dpi)/20.png
 		var markerRoot = arController.createThreeBarcodeMarker(20);
 
-		// var sphere = new THREE.Mesh(
-		// 	new THREE.SphereGeometry(0.5, 8, 8),
-		// 	new THREE.MeshNormalMaterial()
-		// );
-		// sphere.material.flatShading;
-		// sphere.position.z = 0.5;
-        var threeGLTFLoader = new THREE.GLTFLoader();
-
-    threeGLTFLoader.load("../Data/models/House_001_GLB.glb", function (gltf) {
-            model = gltf.scene.children[0];
-            model.position.z = 0;
-            model.position.x = 100;
-            model.position.y = 100;
-
-            // var animation = gltf.animations[0];
-            // var mixer = new THREE.AnimationMixer(model);
-            // mixers.push(mixer);
-            // var action = mixer.clipAction(animation);
-            // action.play();
-
-            markerRoot.matrixAutoUpdate = false;
-            markerRoot.add(model);
-        }
-    );
+		var sphere = new THREE.Mesh(
+			new THREE.SphereGeometry(0.5, 8, 8),
+			new THREE.MeshNormalMaterial()
+		);
+		sphere.material.flatShading;
+		sphere.position.z = 0.5;
 		markerRoot.add(sphere);
 		arScene.scene.add(markerRoot);
 
@@ -111,154 +93,9 @@ renderer.autoClear = false;
 			rotationV *= 0.8;
 
 			requestAnimationFrame(tick);
-			draw();
-
-            if (mixers.length > 0) {
-                for (var i = 0; i < mixers.length; i++) {
-                    mixers[i].update(clock.getDelta());
-                }
-            }
-            };
-	var load = function() {
-        vw = input_width;
-        vh = input_height;
-
-        pscale = 1020 / Math.max(vw, (vh / 3) * 4);
-        sscale = isMobile() ? window.outerWidth / input_width : 1;
-
-        sw = vw * sscale;
-        sh = vh * sscale;
-        video.style.width = sw + "px";
-        video.style.height = sh + "px";
-        container.style.width = sw + "px";
-        container.style.height = sh + "px";
-        canvas_draw.style.clientWidth = sw + "px";
-        canvas_draw.style.clientHeight = sh + "px";
-        canvas_draw.width = sw;
-        canvas_draw.height = sh;
-        w = vw * pscale;
-        h = vh * pscale;
-        pw = Math.max(w, (h / 3) * 4);
-        ph = Math.max(h, (w / 4) * 3);
-        ox = (pw - w) / 2;
-        oy = (ph - h) / 2;
-        canvas_process.style.clientWidth = pw + "px";
-        canvas_process.style.clientHeight = ph + "px";
-        canvas_process.width = pw;
-        canvas_process.height = ph;
-
-        renderer.setSize(sw, sh);
-
-        worker = new Worker("../../js/artoolkit.worker.js");
-
-        worker.postMessage({
-            type: "load",
-            pw: pw,
-            ph: ph,
-            camera_para: camera_para,
-            marker: marker.url
-        });
-
-        worker.onmessage = function(ev) {
-            var msg = ev.data;
-            switch (msg.type) {
-                case "loaded": {
-                    var proj = JSON.parse(msg.proj);
-                    var ratioW = pw / w;
-                    var ratioH = ph / h;
-                    proj[0] *= ratioW;
-                    proj[4] *= ratioW;
-                    proj[8] *= ratioW;
-                    proj[12] *= ratioW;
-                    proj[1] *= ratioH;
-                    proj[5] *= ratioH;
-                    proj[9] *= ratioH;
-                    proj[13] *= ratioH;
-                    setMatrix(camera.projectionMatrix, proj);
-                    break;
-                }
-
-                case "endLoading": {
-                    if (msg.end == true) {
-                        // removing loader page if present
-                        var loader = document.getElementById('loading');
-                        if (loader) {
-                            loader.querySelector('.loading-text').innerText = 'Start the tracking!';
-                            setTimeout(function(){
-                                loader.parentElement.removeChild(loader);
-                            }, 2000);
-                        }
-                    }
-                    break;
-                }
-
-                case "found": {
-                    found(msg);
-                    break;
-                }
-                case "not found": {
-                    found(null);
-                    break;
-                }
-            }
-            track_update();
-            process();
-        };
-    };
-		        var world;
-
-    var found = function(msg) {
-        if (!msg) {
-            world = null;
-        } else {
-            world = JSON.parse(msg.matrixGL_RH);
-        }
-    };
-
-    var lasttime = Date.now();
-    var time = 0;
-
-    function process() {
-        context_process.fillStyle = "black";
-        context_process.fillRect(0, 0, pw, ph);
-        context_process.drawImage(video, 0, 0, vw, vh, ox, oy, w, h);
-
-        var imageData = context_process.getImageData(0, 0, pw, ph);
-        worker.postMessage({ type: "process", imagedata: imageData }, [
-            imageData.data.buffer
-        ]);
-         }
-    var draw = function() {
-        render_update();
-        var now = Date.now();
-        var dt = now - lasttime;
-        time += dt;
-        lasttime = now;
-
-        if (!world) {
-            root.visible = false;
-        } else {
-            root.visible = true;
-
-            // interpolate matrix
-            for (var i = 0; i < 16; i++) {
-                trackedMatrix.delta[i] = world[i] - trackedMatrix.interpolated[i];
-                trackedMatrix.interpolated[i] =
-                    trackedMatrix.interpolated[i] +
-                    trackedMatrix.delta[i] / interpolationFactor;
-            }
-
-            // set matrix of 'root' by detected 'world' matrix
-            setMatrix(root.matrix, trackedMatrix.interpolated);
-        }
-
-        renderer.render(scene, camera);
-    };
-
+		};
 
 		tick();
-		load();
-       process();
 
 	}});
 
