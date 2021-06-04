@@ -45,7 +45,7 @@ var setMatrix = function (matrix, value) {
     }
 };
 
-function start( container, marker, video, input_width, input_height, canvas_draw, render_update, track_update) {
+function start( container, marker, video, input_width, input_height,btn, canvas_draw, render_update, track_update) {
     var vw, vh;
     var sw, sh;
     var pscale, sscale;
@@ -87,7 +87,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     scene.add(root);
 
     /* Load Model */
-    // btn.addEventListener("click", function() {
+    btn.addEventListener("click", function() {
         var threeGLTFLoader = new THREE.GLTFLoader();
 
         threeGLTFLoader.load("../Data/models/Flamingo.glb", function (gltf) {
@@ -106,7 +106,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
                 root.add(model);
             }
         );
-    // });
+    });
 
     var load = function() {
         vw = input_width;
