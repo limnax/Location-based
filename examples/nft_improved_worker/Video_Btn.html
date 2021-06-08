@@ -55,7 +55,7 @@
     <script src="../js/third_party/three.js/stats.min.js"></script>
     <script src="../js/third_party/three.js/three.min.js"></script>
     <script src="../js/third_party/three.js/GLTFLoader.js"></script>
-    <script src="Video_Btn.js"></script>
+<!--    <script src="Video_Btn.js"></script>-->
 
     <script>
       /**
@@ -99,26 +99,29 @@
 
         navigator.mediaDevices.getUserMedia(hint).then(function(stream) {
           video.srcObject = stream;
-          video.addEventListener("loadedmetadata", function() {
-            video.play();
-
-            start(
-              container,
-              markers["pinball"],
-              video,
-              video.videoWidth,
-              video.videoHeight,
-              btn,
-              canvas,
-              function() {
-                statsMain.update();
-              },
-              function() {
-                statsWorker.update();
-              },
-              null
-            );
+          btn.addEventListener("click", function() {
+            console.log("The button is clicked")
           });
+          // video.addEventListener("loadedmetadata", function() {
+          //   video.play();
+          //
+          //   start(
+          //     container,
+          //     markers["pinball"],
+          //     video,
+          //     video.videoWidth,
+          //     video.videoHeight,
+          //     btn,
+          //     canvas,
+          //     function() {
+          //       statsMain.update();
+          //     },
+          //     function() {
+          //       statsWorker.update();
+          //     },
+          //     null
+          //   );
+          // });
         });
       }
     </script>

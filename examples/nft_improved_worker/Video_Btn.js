@@ -87,7 +87,7 @@ function start( container, marker, video, input_width, input_height,btn, canvas_
     scene.add(root);
 
     /* Load Model */
-    btn.addEventListener("click", function() {
+
         var threeGLTFLoader = new THREE.GLTFLoader();
 
         threeGLTFLoader.load("../Data/models/Flamingo.glb", function (gltf) {
@@ -106,7 +106,7 @@ function start( container, marker, video, input_width, input_height,btn, canvas_
                 root.add(model);
             }
         );
-    });
+
 
     var load = function() {
         vw = input_width;
