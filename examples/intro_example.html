@@ -89,9 +89,9 @@ var findObjectUnderEvent = function(ev, camera, objects) {
 		return obj;
 	}
 };
-var alertBox = function() {
-    alert("waooooooooo");
-}
+// var alertBox = function() {
+//     alert("waooooooooo");
+// }
 
 var createBox = function() {
 	// The AR scene.
@@ -196,7 +196,9 @@ window.ARThreeOnLoad = function() {
 		light.position.set(-40, -20, -30);
 		arScene.scene.add(light);
 
-		btn.addEventListener('click', alertBox());
+		btn.addEventListener('click', function () {
+            alert("waooooooooo");
+        });
 
 		var box = createBox();
 
