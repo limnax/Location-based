@@ -33,7 +33,7 @@ html,body {
 <script async src="../js/artoolkit.three.js"></script>
 
 <script>
-
+var btn = document.getElementById("Next");
 var findObjectUnderEvent = function(ev, camera, objects) {
 
 	var style = getComputedStyle(ev.target);
@@ -89,7 +89,9 @@ var findObjectUnderEvent = function(ev, camera, objects) {
 		return obj;
 	}
 };
-
+var alertBox = function() {
+    alert("waooooooooo");
+}
 
 var createBox = function() {
 	// The AR scene.
@@ -194,6 +196,7 @@ window.ARThreeOnLoad = function() {
 		light.position.set(-40, -20, -30);
 		arScene.scene.add(light);
 
+		btn.addEventListener('click', alertBox());
 
 		var box = createBox();
 
