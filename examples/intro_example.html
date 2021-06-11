@@ -219,14 +219,15 @@ window.ARThreeOnLoad = function() {
             model.position.x = 100;
             model.position.y = 100;
 
-            // var animation = gltf.animations[0];
-            // var mixer = new THREE.AnimationMixer(model);
-            // mixers.push(mixer);
-            // var action = mixer.clipAction(animation);
-            // action.play();
+            var animation = gltf.animations[0];
+            var mixer = new THREE.AnimationMixer(model);
+            mixers.push(mixer);
+            var action = mixer.clipAction(animation);
+            action.play();
 
             markerRoot.matrixAutoUpdate = false;
             markerRoot.add(model);
+            alert("waooooooooo");
         }
     );
         });
