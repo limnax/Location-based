@@ -158,7 +158,29 @@ var createBox = function() {
 
 	return {box: box, walls: walls};
 };
+var createGltf = function() {
+    var threeGLTFLoader = new THREE.GLTFLoader();
 
+    threeGLTFLoader.load("./Data/models/Flamingo.glb", function (gltf) {
+            model = gltf.scene.children[0];
+            model.position.z = 0;
+            model.position.x = 100;
+            model.position.y = 100;
+
+            var animation = gltf.animations[0];
+            var mixer = new THREE.AnimationMixer(model);
+            mixers.push(mixer);
+            var action = mixer.clipAction(animation);
+            action.play();
+
+            // markerRoot.matrixAutoUpdate = false;
+            // markerRoot.add(model);
+            // alert("waooooooooo");
+
+        }
+    );
+    return {modelFig: model};
+}
 
 window.ARThreeOnLoad = function() {
 
@@ -199,7 +221,7 @@ window.ARThreeOnLoad = function() {
 
 
 		var box = createBox();
-
+        var ThreeModel = createGltf();
 		renderer.domElement.addEventListener('click', function(ev) {
 			if (findObjectUnderEvent(ev, arScene.camera, box.walls)) {
 				box.box.open = !box.box.open;
@@ -211,25 +233,8 @@ window.ARThreeOnLoad = function() {
         btn.addEventListener('click', function () {
             // alert("waooooooooo");
                 /* Load Model */
-    var threeGLTFLoader = new THREE.GLTFLoader();
-
-    threeGLTFLoader.load("./Data/models/Flamingo.glb", function (gltf) {
-            model = gltf.scene.children[0];
-            model.position.z = 0;
-            model.position.x = 100;
-            model.position.y = 100;
-
-            var animation = gltf.animations[0];
-            var mixer = new THREE.AnimationMixer(model);
-            mixers.push(mixer);
-            var action = mixer.clipAction(animation);
-            action.play();
-
-            markerRoot.matrixAutoUpdate = false;
-            markerRoot.add(model);
-            alert("waooooooooo");
-        }
-    );
+               markerRoot.matrixAutoUpdate = false;
+               markerRoot.add(ThreeModel.modelFig);
         });
 		arScene.scene.add(markerRoot);
 
