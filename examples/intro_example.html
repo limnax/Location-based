@@ -285,11 +285,12 @@ window.ARThreeOnLoad = function() {
           sphere.rotation.y = 270 * (Math.PI / 180);
           sphere.rotation.z = 0 * (Math.PI / 180);
 
-          arController.loadMarker('./Data/patt.hiro', function(markerId) {
-            var markerRoot = arController.createThreeMarker(markerId);
+          // arController.loadMarker('./Data/patt.hiro', function(markerId) {
+            // var markerRoot = arController.createThreeMarker(markerId);
+            var markerRoot = arController.createThreeBarcodeMarker(20);
             markerRoot.add(sphere);
             arScene.scene.add(markerRoot);
-          });
+          // });
 
         });
 
