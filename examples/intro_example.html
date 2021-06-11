@@ -220,13 +220,13 @@ window.ARThreeOnLoad = function() {
 
 
 
-		var box = createBox();
+		// var box = createBox();
         var ThreeModel = createGltf();
-		renderer.domElement.addEventListener('click', function(ev) {
-			if (findObjectUnderEvent(ev, arScene.camera, box.walls)) {
-				box.box.open = !box.box.open;
-			}
-		}, false);
+		// renderer.domElement.addEventListener('click', function(ev) {
+		// 	if (findObjectUnderEvent(ev, arScene.camera, box.walls)) {
+		// 		box.box.open = !box.box.open;
+		// 	}
+		// }, false);
 
 		var markerRoot = arController.createThreeBarcodeMarker(20);
 		// markerRoot.add(box.box);
@@ -241,7 +241,7 @@ window.ARThreeOnLoad = function() {
 		var tick = function() {
 			arScene.process();
 
-			box.box.tick();
+			// box.box.tick();
 
 			arScene.renderOn(renderer);
 			requestAnimationFrame(tick);
