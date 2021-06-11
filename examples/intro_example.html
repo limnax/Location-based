@@ -280,21 +280,22 @@ window.ARThreeOnLoad = function() {
         // // Load a glTF resource
         var url = './Data/models/Flamingo.glb';
         loader.load(url, function (gltf) {
-          sphere = gltf.scene || gltf.scenes[0];
-          sphere.rotation.x = 90 * (Math.PI / 180);
-          sphere.rotation.y = 270 * (Math.PI / 180);
-          sphere.rotation.z = 0 * (Math.PI / 180);
+          // sphere = gltf.scene || gltf.scenes[0];
+          // sphere.rotation.x = 90 * (Math.PI / 180);
+          // sphere.rotation.y = 270 * (Math.PI / 180);
+          // sphere.rotation.z = 0 * (Math.PI / 180);
 
         // threeGLTFLoader.load("../Data/models/House_001_GLB.glb", function (gltf) {
-        //     model = gltf.scene.children[0];
-        //     model.position.z = 0;
-        //     model.position.x = 100;
-        //     model.position.y = 100;
+            model = gltf.scene.children[0];
+            model.position.z = 0;
+            model.position.x = 100;
+            model.position.y = 100;
 
           // arController.loadMarker('./Data/patt.hiro', function(markerId) {
             // var markerRoot = arController.createThreeMarker(markerId);
             var markerRoot = arController.createThreeBarcodeMarker(20);
-            markerRoot.add(sphere);
+            markerRoot.matrixAutoUpdate = false;
+            markerRoot.add(model);
             arScene.scene.add(markerRoot);
           });
 
