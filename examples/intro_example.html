@@ -369,22 +369,42 @@ window.ARThreeOnLoad = function() {
 		// See /doc/patterns/Matrix code 3x3 (72dpi)/20.png
 		var markerRoot = arController.createThreeBarcodeMarker(20);
 
-		var sphere = new THREE.Mesh(
-			new THREE.SphereGeometry(0.5, 8, 8),
-			new THREE.MeshNormalMaterial()
-		);
-		sphere.material.flatShading;
-		sphere.position.z = 0.5;
-		markerRoot.add(sphere);
-		arScene.scene.add(markerRoot);
+		// var sphere = new THREE.Mesh(
+		// 	new THREE.SphereGeometry(0.5, 8, 8),
+		// 	new THREE.MeshNormalMaterial()
+		// );
+		// sphere.material.flatShading;
+		// sphere.position.z = 0.5;
+		// markerRoot.add(sphere);
+		// arScene.scene.add(markerRoot);
+        //
+		// var rotationV = 0;
+		// var rotationTarget = 0;
+        //
+		// renderer.domElement.addEventListener('click', function(ev) {
+		// 	ev.preventDefault();
+		// 	rotationTarget += 1;
+		// }, false);
+		//
+		var threeGLTFLoader = new THREE.GLTFLoader();
 
-		var rotationV = 0;
-		var rotationTarget = 0;
+    threeGLTFLoader.load("./Data/models/Flamingo.glb", function (gltf) {
+            model = gltf.scene.children[0];
+            model.position.z = 0;
+            model.position.x = 100;
+            model.position.y = 100;
 
-		renderer.domElement.addEventListener('click', function(ev) {
-			ev.preventDefault();
-			rotationTarget += 1;
-		}, false);
+            // var animation = gltf.animations[0];
+            // var mixer = new THREE.AnimationMixer(model);
+            // mixers.push(mixer);
+            // var action = mixer.clipAction(animation);
+            // action.play();
+
+            markerRoot.matrixAutoUpdate = false;
+            markerRoot.add(model);
+            arScene.scene.add(markerRoot);
+        }
+    );
 
 
 // Set the renderer autoClear to false, otherwise it
@@ -394,9 +414,9 @@ renderer.autoClear = false;
 		var tick = function() {
 			arScene.process();
 			arScene.renderOn(renderer);
-			rotationV += (rotationTarget - sphere.rotation.z) * 0.05;
-			sphere.rotation.z += rotationV;
-			rotationV *= 0.8;
+			// rotationV += (rotationTarget - sphere.rotation.z) * 0.05;
+			// sphere.rotation.z += rotationV;
+			// rotationV *= 0.8;
 
 			requestAnimationFrame(tick);
 		};
