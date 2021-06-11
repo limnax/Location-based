@@ -233,23 +233,46 @@ html,body {
 <!--	ARThreeOnLoad();-->
 <!--}-->
 <!--</script>-->
-<script defer>
-  window.ARThreeOnLoad = function() {
-    // ARController.getUserMediaThreeScene({maxARVideoSize: 320, cameraParam: 'data-jsartoolkit5/camera_para.dat',
-    //   onSuccess: function(arScene, arController, arCamera) {
-        ARController.getUserMediaThreeScene({maxARVideoSize: 320, cameraParam: 'Data/camera_para-iPhone 5 rear 640x480 1.0m.dat',
-         	onSuccess: function(arScene, arController, arCamera){
-        var scene = new THREE.Scene();
-        var renderer = new THREE.WebGLRenderer({
-          antialias: true,
-        });
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+<script>
+window.ARThreeOnLoad = function() {
 
-        var ambient = new THREE.AmbientLight(0x222222);
-        ambient.intensity = 5;
-        arScene.scene.add(ambient);
+	ARController.getUserMediaThreeScene({maxARVideoSize: 320, cameraParam: 'Data/camera_para-iPhone 5 rear 640x480 1.0m.dat',
+	onSuccess: function(arScene, arController, arCamera) {
+
+		arController.setPatternDetectionMode(artoolkit.AR_MATRIX_CODE_DETECTION);
+
+		document.body.className = arController.orientation;
+
+		var renderer = new THREE.WebGLRenderer({antialias: true});
+		if (arController.orientation === 'portrait') {
+			var w = (window.innerWidth / arController.videoHeight) * arController.videoWidth;
+			var h = window.innerWidth;
+			renderer.setSize(w, h);
+			renderer.domElement.style.paddingBottom = (w-h) + 'px';
+		} else {
+			if (/Android|mobile|iPad|iPhone/i.test(navigator.userAgent)) {
+				renderer.setSize(window.innerWidth, (window.innerWidth / arController.videoWidth) * arController.videoHeight);
+			} else {
+				renderer.setSize(arController.videoWidth, arController.videoHeight);
+				document.body.className += ' desktop';
+			}
+		}
+
+		document.body.insertBefore(renderer.domElement, document.body.firstChild);
+        // document.body.appendChild(renderer.domElement);
+
+        		// Create a couple of lights for our AR scene.
+		var light = new THREE.PointLight(0xffffff);
+		light.position.set(40, 40, 40);
+		arScene.scene.add(light);
+
+		var light = new THREE.PointLight(0xff8800);
+		light.position.set(-40, -20, -30);
+		arScene.scene.add(light);
+
+        // var ambient = new THREE.AmbientLight(0x222222);
+        // ambient.intensity = 5;
+        // arScene.scene.add(ambient);
 
         // Instantiate a loader
         //         var threeGLTFLoader = new THREE.GLTFLoader();
