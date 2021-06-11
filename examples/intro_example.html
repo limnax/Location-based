@@ -31,7 +31,7 @@ html,body {
 <script async src="../build/artoolkit.min.js"></script>
 <script async src="js/third_party/three.js/three.min.js"></script>
 <script async src="../js/artoolkit.three.js"></script>
-
+<script src="../js/third_party/three.js/GLTFLoader.js"></script>
 <script>
 var btn = document.getElementById("Next");
 var findObjectUnderEvent = function(ev, camera, objects) {
@@ -196,9 +196,7 @@ window.ARThreeOnLoad = function() {
 		light.position.set(-40, -20, -30);
 		arScene.scene.add(light);
 
-		btn.addEventListener('click', function () {
-            alert("waooooooooo");
-        });
+
 
 		var box = createBox();
 
@@ -209,7 +207,29 @@ window.ARThreeOnLoad = function() {
 		}, false);
 
 		var markerRoot = arController.createThreeBarcodeMarker(20);
-		markerRoot.add(box.box);
+		// markerRoot.add(box.box);
+        btn.addEventListener('click', function () {
+            // alert("waooooooooo");
+                /* Load Model */
+    var threeGLTFLoader = new THREE.GLTFLoader();
+
+    threeGLTFLoader.load("./Data/models/Flamingo.glb", function (gltf) {
+            model = gltf.scene.children[0];
+            model.position.z = 0;
+            model.position.x = 100;
+            model.position.y = 100;
+
+            // var animation = gltf.animations[0];
+            // var mixer = new THREE.AnimationMixer(model);
+            // mixers.push(mixer);
+            // var action = mixer.clipAction(animation);
+            // action.play();
+
+            markerRoot.matrixAutoUpdate = false;
+            markerRoot.add(model);
+        }
+    );
+        });
 		arScene.scene.add(markerRoot);
 
 		var tick = function() {
