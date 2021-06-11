@@ -283,6 +283,14 @@ window.ARThreeOnLoad = function() {
 
         markerRoot.add(sphere);
         arScene.scene.add(markerRoot);
+        var rotationV = 0;
+		var rotationTarget = 0;
+
+		renderer.domElement.addEventListener('click', function(ev) {
+			ev.preventDefault();
+			rotationTarget += 1;
+		}, false);
+		renderer.autoClear = false;
         // Instantiate a loader
         // var loader = new THREE.GLTFLoader();
         // // // Load a glTF resource
