@@ -103,24 +103,6 @@ function start( container, marker, video, input_width, input_height, canvas_draw
 
             root.matrixAutoUpdate = false;
             root.add(model);
-            model.scale.set( 30, 50, 20 );
-        }
-    );
-
-        threeGLTFLoader.load("../Data/models/Flamingo.glb", function (gltf) {
-            model = gltf.scene.children[0];
-            model.position.z = 10;
-            model.position.x = 120;
-            model.position.y = 12``````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````0;
-
-            // var animation = gltf.animations[0];
-            // var mixer = new THREE.AnimationMixer(model);
-            // mixers.push(mixer);
-            // var action = mixer.clipAction(animation);
-            // action.play();
-
-            root.matrixAutoUpdate = false;
-            root.add(model);
         }
     );
 
