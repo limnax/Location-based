@@ -103,7 +103,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
 
             root.matrixAutoUpdate = false;
             root.add(model);
-            model.scale.set( 10, 10, 10 );
+            model.scale.set( 30, 50, 20 );
         }
     );
 
