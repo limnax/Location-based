@@ -92,8 +92,8 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     threeGLTFLoader.load("../Data/models/Soldier.glb", function (gltf) {
             model = gltf.scene.children[0];
             model.position.z = 0;
-            model.position.x = 70;
-            model.position.y = 70;
+            model.position.x = 90;
+            model.position.y = 90;
             // model.scale.set( 30, 50, 20 );
             // var animation = gltf.animations[0];
             // var mixer = new THREE.AnimationMixer(model);
@@ -103,6 +103,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
 
             root.matrixAutoUpdate = false;
             root.add(model);
+            // mesh.scale.set( 10, 10, 10 );
 
         }
     );
@@ -110,8 +111,8 @@ function start( container, marker, video, input_width, input_height, canvas_draw
         threeGLTFLoader.load("../Data/models/Flamingo.glb", function (gltf) {
             model = gltf.scene.children[0];
             model.position.z = 5;
-            model.position.x = 100;
-            model.position.y = 100;
+            model.position.x = 110;
+            model.position.y = 110;
 
             // var animation = gltf.animations[0];
             // var mixer = new THREE.AnimationMixer(model);
