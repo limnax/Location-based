@@ -106,6 +106,23 @@ function start( container, marker, video, input_width, input_height, canvas_draw
         }
     );
 
+        threeGLTFLoader.load("../Data/models/Flamingo.glb", function (gltf) {
+            model = gltf.scene.children[0];
+            model.position.z = 10;
+            model.position.x = 200;
+            model.position.y = 200;
+
+            // var animation = gltf.animations[0];
+            // var mixer = new THREE.AnimationMixer(model);
+            // mixers.push(mixer);
+            // var action = mixer.clipAction(animation);
+            // action.play();
+
+            root.matrixAutoUpdate = false;
+            root.add(model);
+        }
+    );
+
     var load = function() {
         vw = input_width;
         vh = input_height;
