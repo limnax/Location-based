@@ -92,8 +92,8 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     threeGLTFLoader.load("../Data/models/ferrari.glb", function (gltf) {
             model = gltf.scene.children[0];
             model.position.z = 0;
-            model.position.x = 90;
-            model.position.y = 90;
+            model.position.x = 100;
+            model.position.y = 100;
             // model.scale.set( 30, 50, 20 );
             // var animation = gltf.animations[0];
             // var mixer = new THREE.AnimationMixer(model);
