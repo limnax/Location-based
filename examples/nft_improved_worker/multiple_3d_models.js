@@ -75,11 +75,11 @@ function start( container, marker, video, input_width, input_height, canvas_draw
 
     scene.add(camera);
     //add tilting controls
-    cameraControls = new OrbitControls( camera, renderer.domElement );
-    cameraControls.addEventListener( 'change', render );
-    cameraControls.enablePan = true;
-    cameraControls.enableRotate = true;
-    cameraControls.enableZoom = true;
+    // cameraControls = new OrbitControls( camera, renderer.domElement );
+    // cameraControls.addEventListener( 'change', render );
+    // cameraControls.enablePan = true;
+    // cameraControls.enableRotate = true;
+    // cameraControls.enableZoom = true;
 
     var light = new THREE.AmbientLight(0xffffff);
     scene.add(light);
@@ -106,6 +106,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             // mixers.push(mixer);
             // var action = mixer.clipAction(animation);
             // action.play();
+            model.rotateX(Math.PI/2);//rotate π/4 around the x-axis
 
             root.matrixAutoUpdate = false;
             root.add(model);
