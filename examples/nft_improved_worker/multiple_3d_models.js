@@ -74,6 +74,9 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     // camera.position.z = 400;
 
     scene.add(camera);
+    //add tilting controls
+    cameraControls = new OrbitControls( camera, renderer.domElement );
+    cameraControls.addEventListener( 'change', render );
 
     var light = new THREE.AmbientLight(0xffffff);
     scene.add(light);
