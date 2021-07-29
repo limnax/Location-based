@@ -42,7 +42,7 @@
       <video loop autoplay muted playsinline id="video">
         <source src="./FlyingEagle.mp4" type='video/mp4'>
       </video>
-
+      <button type="button" id="Next">Click Me</button>
       <canvas id="canvas"></canvas>
     </div>
     <a
@@ -77,6 +77,7 @@
       var container = document.getElementById("app");
       var video = document.getElementById("video");
       var canvas = document.getElementById("canvas");
+      var btn = document.getElementById("Next");
 
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         var hint = {
@@ -107,6 +108,7 @@
               container,
               markers["pinball"],
               video,
+              btn,
               video.videoWidth,
               video.videoHeight,
               canvas,
