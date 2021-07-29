@@ -45,7 +45,7 @@ var setMatrix = function (matrix, value) {
     }
 };
 
-function start( container, marker, video, input_width, input_height, canvas_draw, render_update, track_update) {
+function start( container, marker, video, input_width, input_height, canvas_draw, btn, render_update, track_update) {
     var vw, vh;
     var sw, sh;
     var pscale, sscale;
@@ -119,7 +119,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     /* Load Model */
     var threeGLTFLoader = new THREE.GLTFLoader();
 
-    threeGLTFLoader.load("../Data/models/table.glb", function (gltf) {
+    threeGLTFLoader.load("../Data/models/Flamingo.glb", function (gltf) {
             model = gltf.scene.children[0];
             model.position.z = 0;
             model.position.x = 100;
@@ -156,6 +156,8 @@ function start( container, marker, video, input_width, input_height, canvas_draw
         canvas_draw.style.clientHeight = sh + "px";
         canvas_draw.width = sw;
         canvas_draw.height = sh;
+        btn.style.width =  "20 px";
+        btn.style.height =  "10 px";
         w = vw * pscale;
         h = vh * pscale;
         pw = Math.max(w, (h / 3) * 4);
