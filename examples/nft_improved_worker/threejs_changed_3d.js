@@ -119,7 +119,7 @@ function start( container, marker, video, btn, input_width, input_height, canvas
     /* Load Model */
     var threeGLTFLoader = new THREE.GLTFLoader();
 
-    threeGLTFLoader.load("../Data/models/Flamingo.glb", function (gltf) {
+    threeGLTFLoader.load("../Data/models/table.glb", function (gltf) {
             model = gltf.scene.children[0];
             model.position.z = 0;
             model.position.x = 100;
