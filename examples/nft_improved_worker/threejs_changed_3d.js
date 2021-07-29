@@ -119,7 +119,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     /* Load Model */
     var threeGLTFLoader = new THREE.GLTFLoader();
 
-    threeGLTFLoader.load("../Data/models/Flamingo.glb", function (gltf) {
+    threeGLTFLoader.load("../Data/models/table.glb", function (gltf) {
             model = gltf.scene.children[0];
             model.position.z = 0;
             model.position.x = 100;
@@ -130,7 +130,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             // mixers.push(mixer);
             // var action = mixer.clipAction(animation);
             // action.play();
-            model.cursor = 'pointer';
+            // model.cursor = 'pointer';
             model.on('click', function(ev) {
                 model.rotateX(Math.PI/2);
             });
