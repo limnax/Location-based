@@ -45,7 +45,7 @@ var setMatrix = function (matrix, value) {
     }
 };
 
-function start( container, marker, video, input_width, input_height, canvas_draw, btn, render_update, track_update) {
+function start( container, marker, video, input_width, input_height, canvas_draw, render_update, track_update) {
     var vw, vh;
     var sw, sh;
     var pscale, sscale;
@@ -130,14 +130,11 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             // mixers.push(mixer);
             // var action = mixer.clipAction(animation);
             // action.play();
-            // model.cursor = 'pointer';
-            // model.on('click', function(ev) {
-            //     model.rotateX(Math.PI/2);
-            // });
+
             root.matrixAutoUpdate = false;
             root.add(model);
-
-        });
+        }
+    );
 
     var load = function() {
         vw = input_width;
@@ -156,8 +153,6 @@ function start( container, marker, video, input_width, input_height, canvas_draw
         canvas_draw.style.clientHeight = sh + "px";
         canvas_draw.width = sw;
         canvas_draw.height = sh;
-        btn.style.width =  "20 px";
-        btn.style.height =  "10 px";
         w = vw * pscale;
         h = vh * pscale;
         pw = Math.max(w, (h / 3) * 4);
