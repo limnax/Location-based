@@ -131,7 +131,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             // var action = mixer.clipAction(animation);
             // action.play();
             model.cursor = 'pointer';
-            model.on('touchend', function(ev) {
+            model.on('click', function(ev) {
                 model.rotateX(Math.PI/2);
             });
             root.matrixAutoUpdate = false;
