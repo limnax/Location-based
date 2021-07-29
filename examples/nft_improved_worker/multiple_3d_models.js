@@ -110,10 +110,10 @@ function start( container, marker, video, input_width, input_height, canvas_draw
 
             root.matrixAutoUpdate = false;
             root.add(model);
-            model.cursor = 'pointer';
-            model.on('touchend', function(ev) {
-                model.rotateX(Math.PI/2);
-            });
+            // model.cursor = 'pointer';
+            // model.on('touchend', function(ev) {
+            //     model.rotateX(Math.PI/2);
+            // });
             // mesh.scale.set( 10, 10, 10 );
 
         }
