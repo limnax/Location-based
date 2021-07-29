@@ -75,11 +75,11 @@ function start( container, marker, video, input_width, input_height, canvas_draw
 
     scene.add(camera);
     //add tilting controls
-    cameraControls = new OrbitControls( camera, renderer.domElement );
-    cameraControls.addEventListener( 'change', render );
-    cameraControls.enablePan = true;
-    cameraControls.enableRotate = true;
-    cameraControls.enableZoom = true;
+    // cameraControls = new OrbitControls( camera, renderer.domElement );
+    // cameraControls.addEventListener( 'change', render );
+    // cameraControls.enablePan = true;
+    // cameraControls.enableRotate = true;
+    // cameraControls.enableZoom = true;
 
     var light = new THREE.AmbientLight(0xffffff);
     scene.add(light);
@@ -110,6 +110,10 @@ function start( container, marker, video, input_width, input_height, canvas_draw
 
             root.matrixAutoUpdate = false;
             root.add(model);
+            model.cursor = 'pointer';
+            model.on('touchend', function(ev) {
+                model.rotateX(Math.PI/2);
+            });
             // mesh.scale.set( 10, 10, 10 );
 
         }
