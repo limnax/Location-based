@@ -130,13 +130,13 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             // mixers.push(mixer);
             // var action = mixer.clipAction(animation);
             // action.play();
-
-            root.matrixAutoUpdate = false;
-            root.add(model);
             model.cursor = 'pointer';
             model.on('touchend', function(ev) {
                 model.rotateX(Math.PI/2);
             });
+            root.matrixAutoUpdate = false;
+            root.add(model);
+
         });
 
     var load = function() {
