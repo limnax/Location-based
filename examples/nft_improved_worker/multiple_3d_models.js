@@ -68,10 +68,13 @@ function start( container, marker, video, btn, input_width, input_height, canvas
 
     var scene = new THREE.Scene();
 
-    var camera = new THREE.Camera();
-    camera.matrixAutoUpdate = false;
-    // var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-    // camera.position.z = 400;
+    // var camera = new THREE.Camera();
+    // camera.matrixAutoUpdate = false;
+    var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+    camera.position.z = 400;
+
+    // camera.position.set( 0, 20, 100 );
+    // controls.update();
 
     scene.add(camera);
 
@@ -86,10 +89,11 @@ function start( container, marker, video, btn, input_width, input_height, canvas
     var root = new THREE.Object3D();
     scene.add(root);
 
-    // controls = new THREE.OrbitControls( camera, renderer.domElement );
-    // //for mobile touches
-    // // controls.touches.ONE = THREE.TOUCH.PAN;
-    // // controls.touches.TWO = THREE.TOUCH.DOLLY_ROTATE;
+    var controls = new THREE.OrbitControls( camera, renderer.domElement );
+    // for mobile touches
+    controls.rotateSpeed = 1.0;
+    controls.panSpeed = 0.8;
+    // controls.touches.TWO = THREE.TOUCH.DOLLY_ROTATE;
     // controls.minDistance = 4.11;
     // controls.maxDistance = 20;
     // controls.enableZoom = false;
@@ -118,6 +122,7 @@ function start( container, marker, video, btn, input_width, input_height, canvas
 
                 root.matrixAutoUpdate = false;
                 root.add(model);
+                controls.update();
                 count +=1;
                 console.log("the count is "+count);
             });
@@ -141,6 +146,7 @@ function start( container, marker, video, btn, input_width, input_height, canvas
 
                  root.matrixAutoUpdate = false;
                  root.add(model);
+                 controls.update();
                  model.scale.set(10, 5, 5);
                  count -= 1;
 
@@ -298,7 +304,7 @@ function start( container, marker, video, btn, input_width, input_height, canvas
             // set matrix of 'root' by detected 'world' matrix
             setMatrix(root.matrix, trackedMatrix.interpolated);
         }
-
+        controls.update();
         renderer.render(scene, camera);
     };
 
