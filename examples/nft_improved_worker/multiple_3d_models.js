@@ -45,7 +45,7 @@ var setMatrix = function (matrix, value) {
     }
 };
 
-function start( container, marker, video, input_width, input_height, canvas_draw, render_update, track_update) {
+function start( container, marker, video, btn, input_width, input_height, canvas_draw, render_update, track_update) {
     var vw, vh;
     var sw, sh;
     var pscale, sscale;
@@ -74,12 +74,6 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     // camera.position.z = 400;
 
     scene.add(camera);
-    //add tilting controls
-    // cameraControls = new OrbitControls( camera, renderer.domElement );
-    // cameraControls.addEventListener( 'change', render );
-    // cameraControls.enablePan = true;
-    // cameraControls.enableRotate = true;
-    // cameraControls.enableZoom = true;
 
     var light = new THREE.AmbientLight(0xffffff);
     scene.add(light);
@@ -92,55 +86,75 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     var root = new THREE.Object3D();
     scene.add(root);
 
+    // controls = new THREE.OrbitControls( camera, renderer.domElement );
+    // //for mobile touches
+    // // controls.touches.ONE = THREE.TOUCH.PAN;
+    // // controls.touches.TWO = THREE.TOUCH.DOLLY_ROTATE;
+    // controls.minDistance = 4.11;
+    // controls.maxDistance = 20;
+    // controls.enableZoom = false;
+
     /* Load Model */
     var threeGLTFLoader = new THREE.GLTFLoader();
+    var mymodels = ["../Data/models/Flamingo.glb", "../Data/models/House_001_GLB.glb"]
+    count = 0;
+     btn.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        if (count == 0) {
+            if (scene.children.length > 0) {
+                 root.remove(model)
+             }
+            threeGLTFLoader.load(mymodels[0], function (gltf) {
+                model = gltf.scene.children[0];
+                model.position.z = 0;
+                model.position.x = 100;
+                model.position.y = 100;
 
-    threeGLTFLoader.load("../Data/models/Flamingo.glb", function (gltf) {
-            model = gltf.scene.children[0];
-            model.position.z = 0;
-            model.position.x = 100;
-            model.position.y = 100;
-            // model.scale.set( 30, 50, 20 );
-            // var animation = gltf.animations[0];
-            // var mixer = new THREE.AnimationMixer(model);
-            // mixers.push(mixer);
-            // var action = mixer.clipAction(animation);
-            // action.play();
-            // model.rotateX(Math.PI/2);//rotate π/4 around the x-axis
+                // var animation = gltf.animations[0];
+                // var mixer = new THREE.AnimationMixer(model);
+                // mixers.push(mixer);
+                // var action = mixer.clipAction(animation);
+                // action.play();
 
-            root.matrixAutoUpdate = false;
-            root.add(model);
-            // model.cursor = 'pointer';
-            // model.on('touchend', function(ev) {
-            //     model.rotateX(Math.PI/2);
-            // });
-            // mesh.scale.set( 10, 10, 10 );
+                root.matrixAutoUpdate = false;
+                root.add(model);
+                count +=1;
+                console.log("the count is "+count);
+            });
+        }if(count == 1) {
+             if (scene.children.length > 0) {
+                 root.remove(model)
+             }
+
+             // scene.remove(scene.children[0]);
+             threeGLTFLoader.load(mymodels[1], function (hse) {
+                 model = hse.scene.children[0];
+                 model.position.z = 0;
+                 model.position.x = 100;
+                 model.position.y = 100;
+
+                 // var animation = gltf.animations[0];
+                 // var mixer = new THREE.AnimationMixer(model);
+                 // mixers.push(mixer);
+                 // var action = mixer.clipAction(animation);
+                 // action.play();
+
+                 root.matrixAutoUpdate = false;
+                 root.add(model);
+                 model.scale.set(10, 5, 5);
+                 count -= 1;
+
+             });
 
         }
-    );
+    });
 
-    //     threeGLTFLoader.load("../Data/models/Flamingo.glb", function (gltf) {
-    //         model = gltf.scene.children[0];
-    //         model.position.z = 5;
-    //         model.position.x = 110;
-    //         model.position.y = 110;
-    //
-    //         // var animation = gltf.animations[0];
-    //         // var mixer = new THREE.AnimationMixer(model);
-    //         // mixers.push(mixer);
-    //         // var action = mixer.clipAction(animation);
-    //         // action.play();
-    //
-    //         root.matrixAutoUpdate = false;
-    //         root.add(model);
-    //     }
-    // );
 
     var load = function() {
         vw = input_width;
         vh = input_height;
 
-        pscale = 1020 / Math.max(vw, (vh / 3) * 4);
+        pscale = 320 / Math.max(vw, (vh / 3) * 4);
         sscale = isMobile() ? window.outerWidth / input_width : 1;
 
         sw = vw * sscale;
@@ -163,6 +177,9 @@ function start( container, marker, video, input_width, input_height, canvas_draw
         canvas_process.style.clientHeight = ph + "px";
         canvas_process.width = pw;
         canvas_process.height = ph;
+
+         // btn.width = "10px";
+         // btn.height = "10px";
 
         renderer.setSize(sw, sh);
 

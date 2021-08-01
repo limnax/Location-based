@@ -30,6 +30,7 @@
           Worker
         </p>
       </div>
+      <div id="nextBtn"><button id="buttonNext">Next</button></div>
     </div>
 
     <!--
@@ -39,9 +40,7 @@
       -->
 
     <div id="app">
-      <video loop autoplay muted playsinline id="video">
-        <source src="./FlyingEagle.mp4" type='video/mp4'>
-      </video>
+      <video loop autoplay muted playsinline id="video"></video>
 
       <canvas id="canvas"></canvas>
     </div>
@@ -55,8 +54,6 @@
     <script src="../js/third_party/three.js/stats.min.js"></script>
     <script src="../js/third_party/three.js/three.min.js"></script>
     <script src="../js/third_party/three.js/GLTFLoader.js"></script>
-<!--    <script src="../js/third_party/three.js/OrbitControls.js"></script>-->
-<!--    <script src="../js/third_party/three.js/three.min.js"></script>-->
     <script src="multiple_3d_models.js"></script>
 
     <script>
@@ -77,6 +74,7 @@
       var container = document.getElementById("app");
       var video = document.getElementById("video");
       var canvas = document.getElementById("canvas");
+      var btn = document.getElementById("buttonNext");
 
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         var hint = {
@@ -90,10 +88,10 @@
             video: {
                 width: { ideal: 480 },
                 height: { ideal: 640 },
-                facingMode:
-                    { exact:
-                        "environment"
-                    }
+                // facingMode:
+                //     { exact:
+                //         "environment"
+                //     }
                 },
           };
         }
@@ -107,6 +105,7 @@
               container,
               markers["pinball"],
               video,
+              btn,
               video.videoWidth,
               video.videoHeight,
               canvas,
@@ -119,7 +118,7 @@
               null
             );
           });
-        });
+        }).catch(function(err) { console.log(err.name + ": " + err.message); });
       }
     </script>
   </body>
