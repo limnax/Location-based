@@ -68,15 +68,16 @@ function start( container, marker, video, btn, input_width, input_height, canvas
 
     var scene = new THREE.Scene();
 
-    // var camera = new THREE.Camera();
-    // camera.matrixAutoUpdate = false;
-    var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-    camera.position.z = 400;
+    var camera = new THREE.Camera();
+    camera.matrixAutoUpdate = false;
+    // var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+    // camera.position.z = 50;
 
-    // camera.position.set( 0, 20, 100 );
+    // camera.position.set( 0, 0, 4000 );
     // controls.update();
 
     scene.add(camera);
+    // camera.lookAt(scene.position);
 
     var light = new THREE.AmbientLight(0xffffff);
     scene.add(light);
@@ -90,13 +91,26 @@ function start( container, marker, video, btn, input_width, input_height, canvas
     scene.add(root);
 
     var controls = new THREE.OrbitControls( camera, renderer.domElement );
+    // controls.target.set( 0, 25, 0 );
+    // controls.mouseButtons = {LEFT: THREE.MOUSE.LEFT, MIDDLE: THREE.MOUSE.MIDDLE, RIGHT: THREE.MOUSE.RIGHT};
+    // controls.mouseButtons = {
+    //            //Left key to pan
+	// 	LEFT: THREE.MOUSE.PAN,
+    //           //Scroll wheel sliding
+	// 	MIDDLE: THREE.MOUSE.DOLLY,
+    //            //Right click to rotate
+	// 	RIGHT: THREE.MOUSE.ROTATE
+	// 	}
+    // controls.update();
     // for mobile touches
-    controls.rotateSpeed = 1.0;
-    controls.panSpeed = 0.8;
+    controls.enableRotate = true;
+    controls.enablePan = true;
+    // controls.touches.ONE = THREE.TOUCH.PAN;
     // controls.touches.TWO = THREE.TOUCH.DOLLY_ROTATE;
     // controls.minDistance = 4.11;
     // controls.maxDistance = 20;
     // controls.enableZoom = false;
+
 
     /* Load Model */
     var threeGLTFLoader = new THREE.GLTFLoader();
@@ -110,7 +124,7 @@ function start( container, marker, video, btn, input_width, input_height, canvas
              }
             threeGLTFLoader.load(mymodels[0], function (gltf) {
                 model = gltf.scene.children[0];
-                model.position.z = 0;
+                model.position.z = 20;
                 model.position.x = 100;
                 model.position.y = 100;
 
