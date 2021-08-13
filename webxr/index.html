@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no'>
+    <meta name='mobile-web-app-capable' content='yes'>
+    <meta name='apple-mobile-web-app-capable' content='yes'>
+    <link rel='stylesheet' href='css/style.css'>
+    <title>WebXR</title>
+  </head>
+  <body>
+    <div id="overlay">
+      <div class="info-area">
+        <div id="info"></div>
+        <button id="xr-button" disabled>XR not found</button>
+      </div>
+    </div>
+    <script type="module"> // button to start XR experience
+let xrButton = document.getElementById('xr-button');
+
+// to control the xr session
+let xrSession = null;
+
+// reference space used within an application
+let xrRefSpace = null;
+
+// Canvas OpenGL context used for rendering
+let gl = null;
+
+function checkXR() {
+  if (!window.isSecureContext) {
+    document.getElementById("warning").innerText = "WebXR unavailable. Please use secure context";
+  }
+  if (navigator.xr) { // check to see if WebXR is supported
+    navigator.xr.addEventListener('devicechange', checkSupportedState);
+    checkSupportedState();
+  } else {
+    document.getElementById("warning").innerText = "WebXR unavailable for this browser";
+  }
+}
+function checkSupportedState() {
+  navigator.xr.isSessionSupported('immersive-ar').then((supported) => {
+    if (supported) {
+      xrButton.innerHTML = 'Enter AR';
+      xrButton.addEventListener('click', onButtonClicked);
+    } else {
+      xrButton.innerHTML = 'AR not found';
+    }
+    xrButton.disabled = !supported;
+  });
+}
+  </script>
+  </body>
+</html>
