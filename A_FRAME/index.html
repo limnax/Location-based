@@ -1,0 +1,146 @@
+<html>
+
+  <head>
+    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"> </script>
+    <script src="public/js/sphereexpand.js"></script>
+    <script src="public/js/backhome.js"></script>
+    <script src="public/js/examplefunctions.js"></script>
+    <script src="public/js/audiocontrols.js"></script>
+    <script src="public/js/videocontrols.js"></script>
+    <script src="public/js/videosphereexpand.js"></script>
+  </head>
+
+  <body>
+
+     <a-scene >
+
+       <a-assets>
+         <img id="woodfloor" src="https://cdn.glitch.com/c388f728-37b7-4af9-af03-1ee7430663e7%2F4727356277_66fb5f938f_o.jpg?1544178281422" crossorigin="anonymous">
+         <img id="wall" src="https://cdn.glitch.com/f2ee9d74-9726-4bed-9c30-2d49d6391dee%2F4340689010_68c3b1bbb7_o%20(2).jpg?1547154870021" crossorigin="anonymous">
+         <img id="starsky" src="https://cdn.glitch.com/f2ee9d74-9726-4bed-9c30-2d49d6391dee%2Fstarry%20night.jpg?1547158907338" crossorigin="anonymous">
+         <img id="picasso" src="https://cdn.glitch.com/f2ee9d74-9726-4bed-9c30-2d49d6391dee%2FPablo_Picasso_-_Womanwith_a_Mandolin_-_Ermitage%20(1).jpg?1547166417213" crossorigin="anonymous">
+         <img id="bordeauxtheater" src="https://cdn.glitch.com/f2ee9d74-9726-4bed-9c30-2d49d6391dee%2FOp%C3%A9ra_National_de_Bordeaux%20(1).jpg?1547235572572" crossorigin="anonymous">
+         <img id="flowers" src="https://cdn.glitch.com/96ab1f6e-16b9-43c1-9df3-fbe9b24a7490%2Fflower%20from%20Mel.JPG?1549930217255" crossorigin="anonymous">
+         <a-asset-item id="skullmodel" src="https://cdn.glitch.com/f2ee9d74-9726-4bed-9c30-2d49d6391dee%2Ftriceratops.glb?1547240293607"
+         response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
+         <audio id="song" src="https://cdn.glitch.com/96ab1f6e-16b9-43c1-9df3-fbe9b24a7490%2FLeft%20and%20Leaving.mp3?1549919550870" preload="auto" crossorigin="anonymous"></audio>
+         <video id="videoclip" loop="true" src="https://cdn.glitch.com/96ab1f6e-16b9-43c1-9df3-fbe9b24a7490%2FTimelapse%20Video.mp4?1549921266764" crossorigin="anonymous"></video>
+         <video id="spherevidclip" autoplay loop="true" src="https://cdn.glitch.com/96ab1f6e-16b9-43c1-9df3-fbe9b24a7490%2F360%20Timelapse.mp4?1549922819582" crossorigin="anonymous"> </video>
+       </a-assets>
+
+      <a-entity id="camera" position="0 1.6 0" camera look-controls wasd-controls="acceleration:200">
+        <a-entity cursor="rayOrigin: mouse"></a-entity>
+      </a-entity>
+
+      <a-entity laser-controls="hand:right"></a-entity>
+
+
+      <a-sky id="sky" src="#starsky"></a-sky>
+
+      <a-entity id="architecture" class="homeworld">
+         <a-plane id="floor" rotation="-90 90 0" width="30" height="30" src="#woodfloor" repeat="4 4"></a-plane>
+         <a-plane position="0 5 -15" width="30" height="10" src="#wall" repeat="2 1"></a-plane>
+         <a-plane position="-2.5 5 15" rotation="0 180 0" width="25" height="10" src="#wall" repeat="2 1"></a-plane>
+         <a-plane position="-15 5 0" rotation="0 90 0" width="30" height="10" src="#wall" repeat="2 1"></a-plane>
+         <a-plane position="15 5 0" rotation="0 -90 0" width="30" height="10" src="#wall" repeat="2 1"></a-plane>
+         <a-plane id = "ceiling" position="0 10 0" scale="1 1 1" width="30" height="30" rotation="90 0 0"
+           material="metalness:1; roughness:0; transparent: true; opacity: .7; shader: standard;
+           color: #faaf52; side:double;"   ></a-plane>
+       </a-entity>
+
+       <a-entity id="picassodisplay" class="homeworld" position="0 3 -14.9">
+         <a-plane id="picassoframe" color="#191817" width="3" height="4"></a-plane>
+         <a-plane id="picassopainting" src="#picasso" position="0 0 .1" width="2.5" height="3.5" ></a-plane>
+         <a-plane id="picassocaption" position="3.5 -1 .01" height=".6" width="auto" color="#191817"
+          text="value: Pablo Picasso: Woman With a Mandolin. 1909; width: 3; align: center"></a-plane>
+       </a-entity>
+
+
+       <a-entity id="skulldisplay" class="homeworld" position="11 0 -11">
+         <a-box  color="black" width=".5" height="2" depth="1"></a-box>
+         <a-gltf-model position="0 1.8 0" rotation="0 0 -10" src="#skullmodel" scale=".5 .5 .5"
+         animation="property: rotation; to: 0 360 0; easing: easeInOutSine; dur: 30000; loop: true; elasticity: 0"
+         ></a-gltf-model>
+         <a-plane id="skullcaption" position="3.9 1 2" rotation="0 -90 0" height=".6" width="auto" color="#191817"
+          text="value: This 3D model of a Triceratops skull was made by Sketchfab artist MikeBG; width: 3; align: center"
+         ></a-plane>
+       </a-entity>
+
+      <a-entity id="photospheredisplay" class="homeworld" position="-11 0 -11">
+          <a-box color="black" rotation="0 35 0" width="1" height="2" depth=".5" ></a-box>
+          <a-sphere position="0 1.8 0" radius=".7" src="#bordeauxtheater" sphereexpand
+          animation="property: rotation; to: 0 360 0; easing: easeInOutSine; dur: 30000; loop: true; elasticity: 0"
+          ></a-sphere>
+          <a-plane id="photospherecaption" position=".5 .5 .5" rotation="-25 35 0" height=".6" width="auto" color="#191817"
+          text="value: This photosphere from France was taken by Michael Buze; width: 2; wrapCount: 30; align: center"
+          ></a-plane>
+       </a-entity>
+
+       <a-entity id="videospheredisplay"  position="-7 0 -12">
+          <a-box class="homeworld" color="black" rotation="0 35 0" width="1" height="2" depth=".5" ></a-box>
+          <a-videosphere id="videosphereentity" position="0 1.8 0" radius=".7" src="#spherevidclip" videosphereexpand
+          ></a-videosphere>
+          <a-plane id="videospherecaption" class="homeworld" position=".5 .5 .5" rotation="-25 35 0" height=".6" width="auto" color="#191817"
+          text="value: This is a short, equirectangular videosphere; width: 2; wrapCount: 30; align: center"
+          ></a-plane>
+       </a-entity>
+
+
+        <a-entity id="musicpanel" class="homeworld" position="-14.9 3 -6" rotation="0 90 0" sound="src: #song">
+
+          <a-plane width="2.5" height="3.5" position="0 -.06 0" shader="flat" src="#flowers" side="double"  ></a-plane>
+          <a-plane position="0 -.5 .01" width="2" height=".5" transparent="true" opacity=".9" color="#191817"
+                   text="value: Artist - Gabriel Baker \n Song - Left and Leaving; width: 4; align:center"></a-plane>
+
+          <a-plane id="playbox"  depth=".01" scale=".3 .3 .3" position="-.673 -1.22 .01" shader="flat" width="2" height="2"
+          material="color:#191817; shader: flat" transparent="true" opacity=".9" songplayer>
+             <a-triangle id="playicon" color="white" depth=".01" scale="1 1 1" rotation="0 0 -90"
+             position=".1 -.02 .06" shader="flat" width="2" height="2" vertex-a="0 .3 0" >
+            </a-triangle>
+         </a-plane>
+
+         <a-plane id="stopbox"  scale=".3 .3 .3" position="0 -1.22 .01" shader="flat" width="2" height="2"
+         material="color:#191817; shader: flat" transparent="true" opacity=".9" songstopper  >
+             <a-plane id="stopicon" color="white" scale="1 1 1" position="0 0 .06"
+              shader="flat" width="1" height="1"  >
+            </a-plane>
+         </a-plane>
+
+         <a-plane id="pausebox" scale=".3 .3 .3" position=".673 -1.22 .01" shader="flat" width="2" height="2"
+         material="color:#191817; shader: flat" transparent="true" opacity=".9" songpauser >
+            <a-plane id="pauseiconleft" color="white" depth=".1" scale="1 1 1"
+            position="-.4 0 .06" shader="flat" width=".5" height="1"  ></a-plane>
+            <a-plane id="pauseiconright" color="white" depth=".1" scale="1 1 1"
+            position=".4 0 .06" shader="flat" width=".5" height="1"></a-plane>
+         </a-plane>
+
+      </a-entity>
+
+
+       <a-video src="#videoclip" class="homeworld" position="-14.9 3 0" rotation="0 90 0" width="5" height="5">
+
+           <a-plane id="vidplaybox"  depth=".01" scale=".3 .3 .3" position="-.35 -2 .01" shader="flat" width="2" height="2"
+          material="color:#191817; shader: flat" transparent="true" opacity=".9" videoplayer>
+             <a-triangle id="vidplayicon" color="white" depth=".01" scale="1 1 1" rotation="0 0 -90"
+             position=".1 -.02 .06" shader="flat" width="2" height="2" vertex-a="0 .3 0" >
+            </a-triangle>
+         </a-plane>
+
+         <a-plane id="vidpausebox" scale=".3 .3 .3" position=".35 -2 .01" shader="flat" width="2" height="2"
+         material="color:#191817; shader: flat" transparent="true" opacity=".9"  >
+            <a-plane id="vidpauseiconleft" color="white" depth=".1" scale="1 1 1"
+            position="-.4 0 .06" shader="flat" width=".5" height="1"  ></a-plane>
+            <a-plane id="vidpauseiconright" color="white" depth=".1" scale="1 1 1"
+            position=".4 0 .06" shader="flat" width=".5" height="1"></a-plane>
+         </a-plane>
+
+      </a-video>
+
+
+       <a-circle id="homebutton" position="0 .1 0" rotation="-90 0 0" backhome></a-circle>
+
+     </a-scene>
+
+  </body>
+
+</html>
