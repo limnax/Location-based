@@ -91,25 +91,15 @@ function start( container, marker, video, btn, input_width, input_height, canvas
     scene.add(root);
 
     var controls = new THREE.OrbitControls( camera, renderer.domElement );
-    // controls.target.set( 0, 25, 0 );
-    // controls.mouseButtons = {LEFT: THREE.MOUSE.LEFT, MIDDLE: THREE.MOUSE.MIDDLE, RIGHT: THREE.MOUSE.RIGHT};
-    // controls.mouseButtons = {
-    //            //Left key to pan
-	// 	LEFT: THREE.MOUSE.PAN,
-    //           //Scroll wheel sliding
-	// 	MIDDLE: THREE.MOUSE.DOLLY,
-    //            //Right click to rotate
-	// 	RIGHT: THREE.MOUSE.ROTATE
-	// 	}
-    // controls.update();
+    controls.addEventListener('change', render);
+    controls.minDistance = 2;
+    controls.maxDistance = 10;
+    controls.target.set(0, 0, -0.2);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
     // for mobile touches
     controls.enableRotate = true;
     controls.enablePan = true;
-    // controls.touches.ONE = THREE.TOUCH.PAN;
-    // controls.touches.TWO = THREE.TOUCH.DOLLY_ROTATE;
-    // controls.minDistance = 4.11;
-    // controls.maxDistance = 20;
-    // controls.enableZoom = false;
 
 
     /* Load Model */
@@ -287,7 +277,7 @@ function start( container, marker, video, btn, input_width, input_height, canvas
     var tick = function() {
         draw();
         requestAnimationFrame(tick);
-
+        controls.update();
         if (mixers.length > 0) {
             for (var i = 0; i < mixers.length; i++) {
                 mixers[i].update(clock.getDelta());
@@ -318,7 +308,7 @@ function start( container, marker, video, btn, input_width, input_height, canvas
             // set matrix of 'root' by detected 'world' matrix
             setMatrix(root.matrix, trackedMatrix.interpolated);
         }
-        controls.update();
+        // controls.update();
         renderer.render(scene, camera);
     };
 
